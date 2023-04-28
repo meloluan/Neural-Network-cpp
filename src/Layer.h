@@ -26,7 +26,7 @@ public:
 
     void backpropagate(const std::vector<double>& frontLayerErrors, double learningRate);
 
-    void backpropagateOutputLayer(const std::vector<double>& frontLayerErrors);
+    void backpropagateOutputLayer(const std::vector<double>& frontLayerErrors, double learningRate);
 
     void backpropagateHiddenLayer(const std::vector<double>& frontLayerErrors, double learningRate);
 

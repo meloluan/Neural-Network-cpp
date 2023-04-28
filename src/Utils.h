@@ -21,33 +21,29 @@ static double sigmoidDerivative(double x) {
     return sigmoid(x) * (1 - sigmoid(x));
 }
 
-static std::vector<double> softmax(const std::vector<double>& x) {
-    double max = *std::max_element(x.begin(), x.end());
-    std::vector<double> exps(x.size());
-    double expsSum = 0;
-    for (int i = 0; i < x.size(); i++) {
-        exps[i] = std::exp(x[i] - max);
-        expsSum += exps[i];
+static double softmax(const std::vector<double>& x) {
+    double sum = 0.0;
+    for (double xi : x) {
+        sum += exp(xi);
     }
-    std::vector<double> result(x.size());
-    for (int i = 0; i < x.size(); i++) {
-        result[i] = exps[i] / expsSum;
+    double result = 0.0;
+    for (double xi : x) {
+        result += exp(xi) / sum;
     }
     return result;
 }
 
-static double softmaxDerivative(std::vector<double> outputs, int index) {
-    double softmax = Utils::softmax(outputs)[index];
-    double delta;
-    for (int i = 0; i < outputs.size(); i++) {
-        if (i == index) {
-            delta += softmax * (1 - softmax);
-        } else {
-            delta -= softmax * Utils::softmax(outputs)[i];
+static double softmaxDerivative(const std::vector<double>& x, int i) {
+    double s = softmax(x);
+    double result = s * (1 - s) * exp(x[i]);
+    for (int j = 0; j < x.size(); j++) {
+        if (j != i) {
+            result *= exp(x[j]) / (1 + exp(x[j]));
         }
     }
-    return delta;
+    return result;
 }
+
 static double relu(double x) {
     return std::max(0.0, x);
 }

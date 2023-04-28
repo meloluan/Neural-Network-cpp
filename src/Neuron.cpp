@@ -48,7 +48,7 @@ double Neuron::getDelta() const {
 }
 
 void Neuron::setDelta(double delta) {
-    this->m_delta = delta;
+    m_delta = delta;
 }
 
 std::vector<double> Neuron::getWeights() const {
@@ -64,7 +64,7 @@ std::vector<double> Neuron::getInputs() const {
 }
 
 void Neuron::setInputs(std::vector<double> inputs) {
-    this->m_inputs = inputs;
+    m_inputs = inputs;
 }
 
 int Neuron::getNumInputs() const {
@@ -84,5 +84,5 @@ double Neuron::getBias() const {
 }
 
 void Neuron::setBias(double bias) {
-    this->m_bias = bias;
+    m_bias = bias;
 }

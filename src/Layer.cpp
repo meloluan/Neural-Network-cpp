@@ -43,20 +43,21 @@ std::vector<double> Layer::forwardPropagate(std::vector<double> inputs) {
 // backpropagate the error through the layer
 void Layer::backpropagate(const std::vector<double>& frontLayerErrors, double learningRate) {
     if (m_isOutputLayer) {
-        backpropagateOutputLayer(frontLayerErrors);
+        backpropagateOutputLayer(frontLayerErrors, learningRate);
     } else {
         backpropagateHiddenLayer(frontLayerErrors, learningRate);
     }
 }
 
-void Layer::backpropagateOutputLayer(const std::vector<double>& errors) {
+void Layer::backpropagateOutputLayer(const std::vector<double>& errors, double learningRate) {
     for (auto i = 0u; i < m_neurons.size(); ++i) {
         auto& neuron = m_neurons[i];
         auto output = neuron.getOutput();
         auto error = errors[i];
 
         auto delta = error * Utils::sigmoidDerivative(output);
-        neuron.setDelta(delta);
+
+        neuron.updateWeights(learningRate, error);
     }
 }
 
