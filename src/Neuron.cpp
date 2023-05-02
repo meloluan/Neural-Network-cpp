@@ -1,5 +1,7 @@
 #include "Neuron.h"
 
+#include <iostream>
+
 #include "Utils.h"
 
 // set the number of inputs and initialize the weights and bias randomly
@@ -15,11 +17,17 @@ void Neuron::initialize(int num_inputs) {
 
 // calculate the output of the neuron given the input values
 double Neuron::calculateOutput(std::vector<double> inputs) {
+    if (inputs.size() > m_inputs.size()) {
+        std::cout << "ERROR: Number of inputs is greater than the number of weights" << std::endl;
+    }
     // Calculate the weighted sum of inputs and add the bias
     double net = m_bias;
     for (int i = 0; i < inputs.size(); i++) {
         net += inputs[i] * m_weights[i];
     }
+
+    // Store the inputs for later use
+    m_inputs = inputs;
 
     // Apply the activation function (sigmoid)
     m_output = Utils::sigmoid(net);

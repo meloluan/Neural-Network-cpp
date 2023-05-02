@@ -32,9 +32,9 @@ target_compile_features(neural-network-cpp PRIVATE cxx_range_for)
 target_compile_definitions(neural-network-cpp PRIVATE MNIST_DATA_LOCATION="${MNIST_DATA_DIR}")
 
 # Define as bibliotecas necessárias
-find_package(OpenCV REQUIRED )        
-INCLUDE_DIRECTORIES( ${OpenCV_INCLUDE_DIRS} )
+# find_package(OpenCV REQUIRED )        
+# INCLUDE_DIRECTORIES( ${OpenCV_INCLUDE_DIRS} )
 
  find_package (Eigen3 3.3 REQUIRED NO_MODULE)
 
-target_link_libraries(neural-network-cpp ${OpenCV_LIBS} Eigen3::Eigen)
+target_link_libraries(neural-network-cpp  Eigen3::Eigen)

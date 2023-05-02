@@ -50,7 +50,7 @@ int main() {
     Trainer trainer(network, inputs, outputs);
 
     // train the network for 1000 epochs with a learning rate of 0.1
-    trainer.train(0.01, 10);
+    trainer.train(0.01, 3);
 
     // Testando a rede neural com as imagens de teste
     int numCorrect = 0;
