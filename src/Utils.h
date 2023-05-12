@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <random>
 #include <stdexcept>
+#include <unordered_set>
 #include <vector>
 
 namespace Utils {
@@ -13,43 +14,6 @@ static double getRandom() {
     static std::mt19937 gen(rd());
     static std::uniform_real_distribution<double> dis(0.0, 1.0);
     return dis(gen);
-}
-static double sigmoid(double x) {
-    return 1 / (1 + exp(-x));
-}
-static double sigmoidDerivative(double x) {
-    return sigmoid(x) * (1 - sigmoid(x));
-}
-
-static double softmax(const std::vector<double>& x) {
-    double sum = 0.0;
-    for (double xi : x) {
-        sum += exp(xi);
-    }
-    double result = 0.0;
-    for (double xi : x) {
-        result += exp(xi) / sum;
-    }
-    return result;
-}
-
-static double softmaxDerivative(const std::vector<double>& x, int i) {
-    double s = softmax(x);
-    double result = s * (1 - s) * exp(x[i]);
-    for (int j = 0; j < x.size(); j++) {
-        if (j != i) {
-            result *= exp(x[j]) / (1 + exp(x[j]));
-        }
-    }
-    return result;
-}
-
-static double relu(double x) {
-    return std::max(0.0, x);
-}
-
-static double reluDerivative(double x) {
-    return x > 0 ? 1 : 0;
 }
 
 // Normaliza um vetor de dados para ter média 0 e desvio padrão 1
@@ -110,6 +74,55 @@ static double mse(std::vector<double> expected, std::vector<double> actual) {
     }
     double mse = error_sum / expected.size();
     return mse;
+}
+
+static void splitData(const std::vector<std::vector<double>>& inputs,
+                      const std::vector<std::vector<double>>& outputs, double validationFraction,
+                      std::vector<std::vector<double>>& trainInputs,
+                      std::vector<std::vector<double>>& trainOutputs,
+                      std::vector<std::vector<double>>& valInputs,
+                      std::vector<std::vector<double>>& valOutputs) {
+    // Determinar o número de exemplos para validação
+    size_t numValExamples = static_cast<size_t>(inputs.size() * validationFraction);
+
+    // Selecionar aleatoriamente os exemplos de validação
+    std::vector<size_t> valIndices;
+    std::unordered_set<size_t> valIndicesSet;
+    while (valIndicesSet.size() < numValExamples) {
+        size_t index = rand() % inputs.size();
+        if (valIndicesSet.find(index) == valIndicesSet.end()) {
+            valIndices.push_back(index);
+            valIndicesSet.insert(index);
+        }
+    }
+
+    // Separar os exemplos de treinamento e validação
+    trainInputs.reserve(inputs.size() - numValExamples);
+    trainOutputs.reserve(outputs.size() - numValExamples);
+    valInputs.reserve(numValExamples);
+    valOutputs.reserve(numValExamples);
+    for (size_t i = 0; i < inputs.size(); i++) {
+        if (valIndicesSet.find(i) != valIndicesSet.end()) {
+            valInputs.push_back(inputs[i]);
+            valOutputs.push_back(outputs[i]);
+        } else {
+            trainInputs.push_back(inputs[i]);
+            trainOutputs.push_back(outputs[i]);
+        }
+    }
+}
+static double testAccuracy(Network& nn, const std::vector<std::vector<double>>& inputs,
+                           const std::vector<std::vector<double>>& expectedOutputs) {
+    unsigned numCorrect = 0;
+    for (size_t i = 0; i < inputs.size(); i++) {
+        std::vector<double> output = nn.predict(inputs[i]);
+        int predictedLabel = Utils::maxIndex(output);
+        int trueLabel = Utils::maxIndex(expectedOutputs[i]);
+        if (predictedLabel == trueLabel) {
+            numCorrect++;
+        }
+    }
+    return (double)numCorrect / inputs.size();
 }
 
 };  // namespace Utils

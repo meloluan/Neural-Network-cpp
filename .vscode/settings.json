@@ -65,6 +65,7 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "dense": "cpp",
-        "cholesky": "cpp"
+        "cholesky": "cpp",
+        "unordered_set": "cpp"
     }
 }

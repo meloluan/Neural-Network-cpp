@@ -1,0 +1,6 @@
+[submodule "dependencies/googletest"]
+	path = dependencies/googletest
+	url = https://github.com/google/googletest
+[submodule "dependencies/mnist"]
+	path = dependencies/mnist
+	url = https://github.com/meloluan/mnist

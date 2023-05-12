@@ -1,42 +1,20 @@
-#pragma once
 
+#include <cmath>
+#include <iostream>
+#include <limits>
+#include <random>
+#include <stdexcept>
 #include <vector>
-
 class Neuron {
-private:
-    std::vector<double> m_inputs;
-    std::vector<double> m_weights;
-    double m_bias;
-    double m_output;
-    double m_delta;
-
 public:
-    // set the number of inputs and initialize the weights and bias randomly
-    void initialize(int num_inputs);
+    Neuron(unsigned numInputs);
 
-    // calculate the output of the neuron given the input values
-    double calculateOutput(std::vector<double> inputs);
+    double feedForward(const std::vector<double>& inputs) const;
 
-    // update the weights and bias of the neuron during backpropagation
-    void updateWeights(double learningRate, double error);
+    void adjustWeights(const std::vector<double>& inputs, double delta, double learningRate);
 
-    // getters for the output and delta values
-    double getOutput() const;
+    std::vector<double> weights;
 
-    double getDelta() const;
-    void setDelta(double delta);
-
-    std::vector<double> getWeights() const;
-    void setWeight(int index, double weight);
-
-    std::vector<double> getInputs() const;
-    void setInputs(std::vector<double> inputs);
-
-    int getNumInputs() const;
-
-    double getWeight(int index) const;
-    double getActivationDerivative() const;
-
-    double getBias() const;
-    void setBias(double bias);
+private:
+    double bias;
 };

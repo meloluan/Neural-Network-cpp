@@ -1,146 +1,238 @@
 #include "Network.h"
 
-#include <algorithm>
-#include <iostream>
+#include "ActivationFunctions.h"
 
-#include "Utils.h"
+Network::Network(std::vector<std::pair<unsigned int, ActivationFunctionType>> layerConfig,
+                 LossFunctionType lossFunction) {
+    auto iter = layerConfig.begin();
+    unsigned prevLayerSize = iter->first;
 
-// add a layer to the network
-void Network::addLayer(int numNeurons, int numInputs) {
-    Layer layer;
-    for (int i = 0; i < numNeurons; i++) {
-        Neuron neuron;
-        neuron.initialize(numInputs);
+    // Iterate through layer configurations and create layers
+    for (iter; iter != layerConfig.end(); ++iter) {
+        unsigned layerSize = iter->first;
+        ActivationFunctionType activationFunction = iter->second;
 
-        layer.addNeuron(neuron);
+        std::cout << "Creating layer with " << prevLayerSize << " inputs and " << layerSize
+                  << " outputs" << std::endl;
+
+        layers.emplace_back(prevLayerSize, layerSize, activationFunction, lossFunction);
+        prevLayerSize = layerSize;
     }
-    layers.push_back(layer);
+
+    if (lossFunction == LossFunctionType::None) {
+        throw std::invalid_argument("Loss function not specified");
+    }
 }
 
-// Método para realizar a predição da saída da rede a partir de uma entrada
-std::vector<double> Network::predict(const std::vector<double>& input) {
-    // Definir a entrada da primeira camada
-    std::vector<double> output = input;
+std::vector<double> Network::predict(const std::vector<double>& inputs) {
+    std::vector<double> layerOutputs = inputs;
 
-    // Propagar a entrada pela rede neural
-    for (int i = 0; i < layers.size(); i++) {
-        output = layers[i].forwardPropagate(output);
+    for (Layer& layer : layers) {
+        layerOutputs = layer.feedForward(layerOutputs);
     }
 
-    // Retornar a saída final da rede neural
-    return output;
+    return layerOutputs;
 }
 
-// set the number of inputs and outputs and initialize the network layers
-void Network::initialize(int num_inputs, int num_outputs, std::vector<int> num_neurons) {
-    layers.resize(num_neurons.size());
-
-    // initialize the input layer
-    layers[0].initialize(num_inputs, num_neurons[0]);
-
-    // initialize the hidden layers
-    for (int i = 1; i < num_neurons.size() - 1; i++) {
-        layers[i].initialize(num_neurons[i - 1], num_neurons[i]);
+double Network::validate(const std::vector<std::vector<double>>& inputs,
+                         const std::vector<std::vector<double>>& outputs) {
+    if (inputs.size() != outputs.size()) {
+        throw std::runtime_error("Mismatch in the number of input and output samples");
     }
 
-    // initialize the output layer
-    layers[num_neurons.size() - 1].initialize(num_neurons[num_neurons.size() - 2], num_outputs);
-}
+    double totalError = 0.0;
 
-// // calculate the output of the network given the input values
-std::vector<double> Network::calculateOutput(std::vector<double> inputs) {
-    std::vector<double> outputs = inputs;
+    for (size_t i = 0; i < inputs.size(); i++) {
+        std::vector<double> predicted = predict(inputs[i]);
 
-    // feed forward through each layer
-    for (int i = 0; i < layers.size(); i++) {
-        outputs = layers[i].forwardPropagate(outputs);
-    }
-
-    return outputs;
-}
-
-// update the weights and biases of each neuron in the network during backpropagation
-void Network::backpropagate(std::vector<double> expectedOutput, double learningRate) {
-    // calculate the output layer's errors
-    auto& outputLayer = layers.back();
-    auto outputLayerOutputs = outputLayer.getOutputs();
-    std::vector<double> outputLayerErrors;
-    for (int i = 0; i < outputLayer.getNumNeurons(); i++) {
-        double error = expectedOutput[i] - outputLayerOutputs[i];
-        outputLayerErrors.push_back(error);
-    }
-
-    outputLayer.backpropagate(outputLayerErrors, learningRate);
-
-    // propagate the errors backwards through each layer
-    for (int i = layers.size() - 2; i >= 0; i--) {
-        auto& layer = layers[i];
-        std::vector<double> layerErrors(layer.getNumNeurons());
-
-        auto layerDeltas = layer.getDeltas();
-
-        layer.backpropagate(layerDeltas, learningRate);
-    }
-
-    // // update the weights and biases of each neuron in each layer
-    // for (int i = layers.size() - 1; i >= 0; i--) {
-    //     auto& layer = layers[i];
-    //     // auto layerDeltas = layer.getDeltas();
-    //     layer.updateWeights(learningRate);
-    // }
-}
-
-// train the network using backpropagation
-void Network::train(std::vector<std::vector<double>> trainingInputs,
-                    std::vector<std::vector<double>> trainingOutputs, double learningRate,
-                    int numEpochs) {
-    // initialize start time
-    time_t start_time;
-    time(&start_time);
-
-    for (int epoch = 0; epoch < numEpochs; epoch++) {
         double error = 0.0;
+        for (size_t j = 0; j < outputs[i].size(); j++) {
+            double diff = outputs[i][j] - predicted[j];
+            error += diff * diff;
+        }
+        totalError += error / outputs[i].size();
+    }
 
-        // for each training example
-        for (int i = 0; i < trainingInputs.size(); i++) {
-            std::vector<double> inputs = trainingInputs[i];
-            std::vector<double> expectedOutputs = trainingOutputs[i];
+    return totalError / inputs.size();
+}
+double Network::meanSquaredError(const std::vector<std::vector<double>>& inputs,
+                                 const std::vector<std::vector<double>>& expectedOutputs) {
+    double sumSquaredError = 0.0;
+    for (size_t i = 0; i < inputs.size(); i++) {
+        const std::vector<double>& input = inputs[i];
+        const std::vector<double>& expectedOutput = expectedOutputs[i];
 
-            // feed forward to calculate the output
-            std::vector<double> actualOutputs = calculateOutput(inputs);
+        std::vector<double> output = predict(input);
+        for (size_t j = 0; j < output.size(); j++) {
+            double error = expectedOutput[j] - output[j];
+            sumSquaredError += error * error;
+        }
+        std::cout << "Sum squared error: " << sumSquaredError << std::endl;
+    }
+    return sumSquaredError / inputs.size();
+}
 
-            std::cout << "SIZE " << actualOutputs.size() << " | Actual Outputs: ";
-            for (int j = 0; j < actualOutputs.size(); j++) {
-                std::cout << actualOutputs[j] << " ";
+void Network::train(const std::vector<std::vector<double>>& inputs,
+                    const std::vector<std::vector<double>>& outputs, unsigned numEpochs,
+                    double learningRate, double validationFraction, TrainingCallback callback) {
+    if (inputs.size() != outputs.size()) {
+        throw std::runtime_error("Mismatch in the number of input and output samples");
+    }
+
+    unsigned numTrainSamples = static_cast<unsigned>(inputs.size() * (1.0 - validationFraction));
+    std::vector<std::vector<double>> trainInputs(inputs.begin(), inputs.begin() + numTrainSamples);
+    std::vector<std::vector<double>> trainOutputs(outputs.begin(),
+                                                  outputs.begin() + numTrainSamples);
+    std::vector<std::vector<double>> validationInputs(inputs.begin() + numTrainSamples,
+                                                      inputs.end());
+    std::vector<std::vector<double>> validationOutputs(outputs.begin() + numTrainSamples,
+                                                       outputs.end());
+
+    if (!trainInputs.empty() && trainInputs[0].size() != layers[0].getInputSize()) {
+        throw std::runtime_error("Mismatch in the input size and the expected number of inputs");
+    }
+
+    for (unsigned epoch = 0; epoch < numEpochs; epoch++) {
+        double totalError = 0.0;
+
+        // Shuffle training samples
+        std::vector<size_t> sampleIndices(trainInputs.size());
+        for (size_t i = 0; i < sampleIndices.size(); i++) {
+            sampleIndices[i] = i;
+        }
+        std::random_shuffle(sampleIndices.begin(), sampleIndices.end());
+
+        // Train on each sample
+        for (size_t i = 0; i < trainInputs.size(); i++) {
+            // Forward pass
+            std::vector<double> layerOutputs = trainInputs[sampleIndices[i]];
+
+            for (Layer& layer : layers) {
+                layerOutputs = layer.feedForward(layerOutputs);
             }
-            std::cout << " || SIZE " << expectedOutputs.size() << " | Expected Outputs: ";
-            for (int j = 0; j < expectedOutputs.size(); j++) {
-                std::cout << expectedOutputs[j] << " ";
-            }
-            std::cout << std::endl;
 
-            // calculate the error and backpropagate
-            std::vector<double> errors(expectedOutputs.size());
-            for (int j = 0; j < expectedOutputs.size(); j++) {
-                errors[j] = expectedOutputs[j] - actualOutputs[j];
-            }
+            // Calculate error
+            double error =
+                layers.back().getLossFunction()(trainOutputs[sampleIndices[i]], layerOutputs);
+            totalError += error;
 
-            backpropagate(errors, learningRate);
+            // Backward pass
+            std::vector<std::vector<double>> layerDeltas(layers.size());
+            for (int layerIndex = layers.size() - 1; layerIndex >= 0; layerIndex--) {
+                Layer& layer = layers[layerIndex];
 
-            // accumulate the total error for this epoch
-            for (int j = 0; j < errors.size(); j++) {
-                error += errors[j] * errors[j];
+                layerDeltas[layerIndex].resize(layer.getOutputSize());
+                std::vector<double> output = layer.getOutputs();
+                if (layer.withSoftmax()) {
+                    // Softmax with cross-entropy loss
+                    for (size_t j = 0; j < layer.getOutputSize(); j++) {
+                        layerDeltas[layerIndex][j] = trainOutputs[sampleIndices[i]][j] - output[j];
+                        if (std::isnan(layerDeltas[layerIndex][j])) {
+                            throw std::runtime_error("NaN value in layer deltas (softmax)");
+                        }
+                    }
+                } else {
+                    if (layerIndex == layers.size() - 1) {
+                        // Special case for output layer
+                        for (size_t j = 0; j < layer.getOutputSize(); j++) {
+                            layerDeltas[layerIndex][j] =
+                                (trainOutputs[sampleIndices[i]][j] - output[j]) *
+                                layer.activationDerivativeFunction(output[j]);
+                            if (std::isnan(layerDeltas[layerIndex][j])) {
+                                throw std::runtime_error("NaN value in layer deltas (output)");
+                            }
+                        }
+                    } else {
+                        // Hidden layers
+                        double sum = 0.0;
+                        auto layerDeltaNextLayer = layerDeltas[layerIndex + 1];
+
+                        for (size_t k = 0; k < layer.getOutputSize(); k++) {
+                            for (size_t j = 0; j < layer.getInputSize(); j++) {
+                                sum += layer.neurons[k].weights[j] * layerDeltaNextLayer[k];
+                                if (std::isnan(sum)) {
+                                    std::cout << "Layer index: " << layerIndex << std::endl;
+                                    std::cout << "Neuron index: " << k << std::endl;
+                                    std::cout << "Weight: " << layer.neurons[k].weights[j]
+                                              << std::endl;
+                                    std::cout
+                                        << "Layer delta next layer: " << layerDeltaNextLayer[k]
+                                        << std::endl;
+                                    throw std::runtime_error("NaN value in sum (hidden)");
+                                }
+                            }
+                            auto activationDerivative =
+                                layer.activationDerivativeFunction(output[k]);
+                            layerDeltas[layerIndex][k] = sum * activationDerivative;
+
+                            if (std::isnan(layerDeltas[layerIndex][k])) {
+                                std::cout << "Layer index: " << layerIndex << std::endl;
+                                std::cout << "Neuron index: " << k << std::endl;
+                                std::cout << "Weights: ";
+                                for (size_t j = 0; j < layer.getInputSize(); j++) {
+                                    std::cout << layer.neurons[k].weights[j] << " ";
+                                }
+                                std::cout << std::endl;
+                                std::cout << "Next layer deltas: ";
+                                for (size_t j = 0; j < layerDeltaNextLayer.size(); j++) {
+                                    std::cout << layerDeltaNextLayer[j] << " ";
+                                }
+                                std::cout << std::endl;
+                                std::cout << "Layer delta: " << layerDeltas[layerIndex][k]
+                                          << std::endl;
+                                std::cout << "Sum: " << sum << std::endl;
+                                std::cout << "Activation derivative: " << activationDerivative
+                                          << std::endl;
+                                throw std::runtime_error("NaN value in layer deltas (hidden)");
+                            }
+                        }
+                    }
+                }
+
+                std::vector<double> input;
+                if (layerIndex == 0) {
+                    input = trainInputs[sampleIndices[i]];
+                } else {
+                    input = layers[layerIndex - 1].getOutputs();
+                }
+
+                // Update weights
+                layer.adjustWeights(input, layerDeltas[layerIndex], learningRate);
             }
         }
+        totalError /= trainInputs.size();
 
-        // calculate remaining training time
-        time_t current_time;
-        time(&current_time);
-        double time_elapsed = difftime(current_time, start_time);
-        double avg_time_per_epoch = time_elapsed / (epoch + 1);
-        double remaining_time = avg_time_per_epoch * (numEpochs - epoch - 1);
-        std::cout << "Error: " << error
-                  << " | Estimated remaining training time: " << remaining_time << " seconds "
-                  << std::endl;
+        double validationError = validate(validationInputs, validationOutputs);
+
+        if (callback) {
+            callback(epoch, totalError, validationError);
+        }
     }
+}
+
+void Network::updateWeights(double learningRate, const std::vector<double>& hiddenGradients,
+                            const std::vector<double>& outputGradients) {
+    // Update output layer weights
+    // for (size_t i = 0; i < outputLayer.neurons.size(); i++) {
+    //     for (size_t j = 0; j < outputLayer.neurons[i].weights.size() - 1;
+    //          j++) {  // -1 to exclude bias
+    //         outputLayer.neurons[i].weights[j] +=
+    //             learningRate * outputGradients[i] *
+    //             hiddenLayer.neurons[j].feedForward(hiddenLayer.neurons[j].weights);
+    //     }
+    //     // Update output layer bias
+    //     outputLayer.neurons[i].weights.back() += learningRate * outputGradients[i];
+    // }
+
+    // // Update hidden layer weights
+    // for (size_t i = 0; i < hiddenLayer.neurons.size(); i++) {
+    //     for (size_t j = 0; j < hiddenLayer.neurons[i].weights.size() - 1;
+    //          j++) {  // -1 to exclude bias
+    //         hiddenLayer.neurons[i].weights[j] +=
+    //             learningRate * hiddenGradients[i] *
+    //             hiddenLayer.neurons[i].feedForward(hiddenLayer.neurons[i].weights);
+    //     }
+    //     // Update hidden layer bias
+    //     hiddenLayer.neurons[i].weights.back() += learningRate * hiddenGradients[i];
+    // }
 }
