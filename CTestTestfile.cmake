@@ -1,11 +1,41 @@
 # CMake generated Testfile for 
-# Source directory: /home/brabo/Projetos/neural-network-cpp
-# Build directory: /home/brabo/Projetos/neural-network-cpp
+# Source directory: /Users/meloluan/Projetos/Neural-Network-CPP
+# Build directory: /Users/meloluan/Projetos/Neural-Network-CPP
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.
-add_test(PCATest.DimensionalityReduction "/home/brabo/Projetos/neural-network-cpp/neural-network-cpp-test" "--gtest_filter=PCATest.DimensionalityReduction")
-set_tests_properties(PCATest.DimensionalityReduction PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/home/brabo/.local/lib/python3.10/site-packages/cmake/data/share/cmake-3.26/Modules/GoogleTest.cmake;402;add_test;/home/brabo/Projetos/neural-network-cpp/CMakeLists.txt;62;gtest_add_tests;/home/brabo/Projetos/neural-network-cpp/CMakeLists.txt;0;")
-add_test(neural-network-cpp-test "neural-network-cpp-test")
-set_tests_properties(neural-network-cpp-test PROPERTIES  _BACKTRACE_TRIPLES "/home/brabo/Projetos/neural-network-cpp/CMakeLists.txt;72;add_test;/home/brabo/Projetos/neural-network-cpp/CMakeLists.txt;0;")
+add_test(LayerTest.FeedForward "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=LayerTest.FeedForward")
+set_tests_properties(LayerTest.FeedForward PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(LayerTest.AdjustWeights "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=LayerTest.AdjustWeights")
+set_tests_properties(LayerTest.AdjustWeights PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(LayerTest.ActivationFunction "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=LayerTest.ActivationFunction")
+set_tests_properties(LayerTest.ActivationFunction PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(LayerTest.ActivationDerivativeFunction "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=LayerTest.ActivationDerivativeFunction")
+set_tests_properties(LayerTest.ActivationDerivativeFunction PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(LayerTest.GetOutputs "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=LayerTest.GetOutputs")
+set_tests_properties(LayerTest.GetOutputs PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(LayerTest.GetLossFunction "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=LayerTest.GetLossFunction")
+set_tests_properties(LayerTest.GetLossFunction PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(LayerTest.GetOutputSize "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=LayerTest.GetOutputSize")
+set_tests_properties(LayerTest.GetOutputSize PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(LayerTest.GetInputSize "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=LayerTest.GetInputSize")
+set_tests_properties(LayerTest.GetInputSize PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(LayerTest.WithSoftmax "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=LayerTest.WithSoftmax")
+set_tests_properties(LayerTest.WithSoftmax PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(NetworkTest.Predict "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=NetworkTest.Predict")
+set_tests_properties(NetworkTest.Predict PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(NetworkTest.Validate "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=NetworkTest.Validate")
+set_tests_properties(NetworkTest.Validate PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(NetworkTest.MeanSquaredError "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=NetworkTest.MeanSquaredError")
+set_tests_properties(NetworkTest.MeanSquaredError PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(NetworkTest.Train "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=NetworkTest.Train")
+set_tests_properties(NetworkTest.Train PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(NeuronTest.FeedForward "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=NeuronTest.FeedForward")
+set_tests_properties(NeuronTest.FeedForward PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(NeuronTest.AdjustWeights "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=NeuronTest.AdjustWeights")
+set_tests_properties(NeuronTest.AdjustWeights PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(PCATest.DimensionalityReduction "/Users/meloluan/Projetos/Neural-Network-CPP/NeuralNetworkCpp-test" "--gtest_filter=PCATest.DimensionalityReduction")
+set_tests_properties(PCATest.DimensionalityReduction PROPERTIES  SKIP_REGULAR_EXPRESSION "\\[  SKIPPED \\]" _BACKTRACE_TRIPLES "/usr/local/Cellar/cmake/3.26.3/share/cmake/Modules/GoogleTest.cmake;402;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;62;gtest_add_tests;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
+add_test(NeuralNetworkCpp-test "NeuralNetworkCpp-test")
+set_tests_properties(NeuralNetworkCpp-test PROPERTIES  _BACKTRACE_TRIPLES "/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;72;add_test;/Users/meloluan/Projetos/Neural-Network-CPP/CMakeLists.txt;0;")
 subdirs("dependencies/googletest")

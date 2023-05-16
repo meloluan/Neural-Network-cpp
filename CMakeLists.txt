@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.10)
-project(neural-network-cpp C CXX)
+project(NeuralNetworkCpp C CXX)
 set(PROJECT_DESCRIPTION   "A rock solid project with enforced style, testing and static analysis")
 set(PROJECT_AUTHOR        "Luan")
 set(PROJECT_URL           "https://github.com/meloluan/neural-network-cpp")

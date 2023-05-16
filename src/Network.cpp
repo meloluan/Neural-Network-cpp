@@ -1,5 +1,7 @@
 #include "Network.h"
 
+#include <algorithm>
+
 #include "ActivationFunctions.h"
 
 Network::Network(std::vector<std::pair<unsigned int, ActivationFunctionType>> layerConfig,
@@ -92,6 +94,9 @@ void Network::train(const std::vector<std::vector<double>>& inputs,
         throw std::runtime_error("Mismatch in the input size and the expected number of inputs");
     }
 
+    std::random_device rd;
+    std::mt19937 g(rd());
+
     for (unsigned epoch = 0; epoch < numEpochs; epoch++) {
         double totalError = 0.0;
 
@@ -100,7 +105,7 @@ void Network::train(const std::vector<std::vector<double>>& inputs,
         for (size_t i = 0; i < sampleIndices.size(); i++) {
             sampleIndices[i] = i;
         }
-        std::random_shuffle(sampleIndices.begin(), sampleIndices.end());
+        std::shuffle(sampleIndices.begin(), sampleIndices.end(), g);
 
         // Train on each sample
         for (size_t i = 0; i < trainInputs.size(); i++) {
