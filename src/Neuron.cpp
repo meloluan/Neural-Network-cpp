@@ -40,3 +40,7 @@ void Neuron::adjustWeights(const std::vector<double>& inputs, double delta, doub
 
     bias += learningRate * delta;
 }
+
+void Neuron::setBias(double bias) {
+    this->bias = bias;
+}

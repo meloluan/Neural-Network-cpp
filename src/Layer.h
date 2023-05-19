@@ -38,6 +38,8 @@ public:
     size_t getOutputSize();
     size_t getInputSize();
 
+    std::vector<std::vector<double>> getWeights();
+
     bool withSoftmax();
 
 private:

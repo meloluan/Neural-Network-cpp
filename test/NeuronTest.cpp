@@ -1,3 +1,4 @@
+#include "ActivationFunctions.h"
 #include "Neuron.h"
 #include "gtest/gtest.h"
 
@@ -15,11 +16,33 @@ protected:
 
 // Test case for feed forward
 TEST_F(NeuronTest, FeedForward) {
-    std::vector<double> inputs{0.5, 0.3, 0.2};
-    double expected_output = 0.6;  // Replace with the expected output for the given inputs
-    double tolerance = 0.0001;     // Replace with the desired tolerance
-    double output = neuron->feedForward(inputs);
-    ASSERT_NEAR(output, expected_output, tolerance);
+    // Test inputs
+    std::vector<double> inputs = {0.5, 0.3, 0.2};
+
+    // Neuron weights
+    std::vector<double> weights = {0.1, 0.2, 0.3};
+    double bias = -0.1;
+
+    // Create a neuron
+    Neuron neuron(weights.size());
+    neuron.weights = weights;
+    neuron.setBias(bias);
+
+    // Calculate the weighted sum of inputs
+    double weightedSum = 0.0;
+    for (size_t i = 0; i < inputs.size(); i++) {
+        weightedSum += inputs[i] * weights[i];
+    }
+    weightedSum += bias;
+
+    // Calculate the expected output using the sigmoid activation function
+    double expectedOutput = 1.0 / (1.0 + std::exp(-weightedSum));
+
+    // Calculate the output using feedForward
+    double output = neuron.feedForward(inputs);
+
+    // Check if the output is close to the expected output within a tolerance of 1e-6
+    ASSERT_NEAR(output, expectedOutput, 1e-6);
 }
 
 // Test case for adjusting weights
@@ -35,6 +58,7 @@ TEST_F(NeuronTest, AdjustWeights) {
 
     // Check if the weights have been adjusted correctly
     for (size_t i = 0; i < initial_weights.size(); i++) {
+        // Replace with the expected weight adjustment based on the inputs, delta, and learning rate
         double expected_weight = initial_weights[i] + learningRate * delta * inputs[i];
         ASSERT_DOUBLE_EQ(neuron->weights[i], expected_weight);
     }

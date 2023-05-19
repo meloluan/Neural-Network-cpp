@@ -37,7 +37,16 @@ TEST_F(LayerTest, AdjustWeights) {
     double learningRate = 0.1;
 
     layer->adjustWeights(input, deltas, learningRate);
-    // Add assertions to validate the weight adjustment
+
+    std::vector<std::vector<double>> weights = layer->getWeights();
+    ASSERT_EQ(weights.size(), 3);
+    ASSERT_EQ(weights[0].size(), 2);
+    ASSERT_NEAR(weights[0][0], 0.10000000000000002, 1e-6);
+    ASSERT_NEAR(weights[0][1], 0.30000000000000004, 1e-6);
+    ASSERT_NEAR(weights[1][0], 0.20000000000000004, 1e-6);
+    ASSERT_NEAR(weights[1][1], 0.4000000000000001, 1e-6);
+    ASSERT_NEAR(weights[2][0], 0.30000000000000004, 1e-6);
+    ASSERT_NEAR(weights[2][1], 0.5000000000000001, 1e-6);
 }
 
 // Test case for activation function

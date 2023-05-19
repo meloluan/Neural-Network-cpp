@@ -49,6 +49,14 @@ std::vector<double> Layer::getOutputs() {
     return m_outputs;
 }
 
+std::vector<std::vector<double>> Layer::getWeights() {
+    std::vector<std::vector<double>> weights(neurons.size());
+    for (size_t i = 0; i < neurons.size(); i++) {
+        weights[i] = neurons[i].weights;
+    }
+    return weights;
+}
+
 void Layer::adjustWeights(const std::vector<double>& inputs, const std::vector<double>& deltas,
                           double learningRate) {
     for (size_t i = 0; i < neurons.size(); i++) {

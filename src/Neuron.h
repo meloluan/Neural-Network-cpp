@@ -13,6 +13,8 @@ public:
 
     void adjustWeights(const std::vector<double>& inputs, double delta, double learningRate);
 
+    void setBias(double bias);
+
     std::vector<double> weights;
 
 private:

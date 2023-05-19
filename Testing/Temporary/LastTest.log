@@ -1,0 +1,70 @@
+Start testing: May 12 13:41 -03
+----------------------------------------------------------
+1/2 Testing: PCATest.DimensionalityReduction
+1/2 Test: PCATest.DimensionalityReduction
+Command: "/home/brabo/Projetos/neural-network-cpp/neural-network-cpp-test" "--gtest_filter=PCATest.DimensionalityReduction"
+Directory: /home/brabo/Projetos/neural-network-cpp
+"PCATest.DimensionalityReduction" start time: May 12 13:41 -03
+Output:
+----------------------------------------------------------
+Note: Google Test filter = PCATest.DimensionalityReduction
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from PCATest
+[ RUN      ] PCATest.DimensionalityReduction
+Converting input to Eigen matrix...
+Calculating transformation matrix...
+Calculating covariance matrix...
+Dimensões da matriz cov: 3 x 3
+Calculating eigenvalues and eigenvectors...
+Calculating principal components...
+Applying transformation...
+Converting output to vector of vectors...
+[       OK ] PCATest.DimensionalityReduction (0 ms)
+[----------] 1 test from PCATest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"PCATest.DimensionalityReduction" end time: May 12 13:41 -03
+"PCATest.DimensionalityReduction" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/2 Testing: neural-network-cpp-test
+2/2 Test: neural-network-cpp-test
+Command: "/home/brabo/Projetos/neural-network-cpp/neural-network-cpp-test"
+Directory: /home/brabo/Projetos/neural-network-cpp
+"neural-network-cpp-test" start time: May 12 13:41 -03
+Output:
+----------------------------------------------------------
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from PCATest
+[ RUN      ] PCATest.DimensionalityReduction
+Converting input to Eigen matrix...
+Calculating transformation matrix...
+Calculating covariance matrix...
+Dimensões da matriz cov: 3 x 3
+Calculating eigenvalues and eigenvectors...
+Calculating principal components...
+Applying transformation...
+Converting output to vector of vectors...
+[       OK ] PCATest.DimensionalityReduction (0 ms)
+[----------] 1 test from PCATest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"neural-network-cpp-test" end time: May 12 13:41 -03
+"neural-network-cpp-test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: May 12 13:41 -03
