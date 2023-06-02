@@ -62,5 +62,3 @@ Contributions are welcome! If you have any ideas, suggestions, or bug reports, p
 License
 
 This library is licensed under the MIT License. See the LICENSE file for details.
-
-Please make sure to update the README file with appropriate descriptions, usage instructions, and license information for your project.
