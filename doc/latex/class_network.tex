@@ -1,0 +1,218 @@
+\hypertarget{class_network}{}\doxysection{Network Class Reference}
+\label{class_network}\index{Network@{Network}}
+
+
+{\ttfamily \#include $<$Network.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_network_a29a3fa306540724f3a4890453a946134}{Training\+Callback}} = std\+::function$<$ void(unsigned epoch, double error, double validation\+Error)$>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_network_a70c2b99568130e8f2c6c691ba1e488ad}{Network}} (std\+::vector$<$ std\+::pair$<$ unsigned int, \mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}{Activation\+Function\+Type}} $>$$>$ layer\+Config, \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039}{Loss\+Function\+Type}} loss\+Function=\mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039a6adf97f83acf6453d4a6a4b1070f3754}{Loss\+Function\+Type\+::\+None}})
+\begin{DoxyCompactList}\small\item\em Constructs a new \mbox{\hyperlink{class_network}{Network}} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_ac56e154f4302f8e5fdc2a86866c763c4}{set\+Weights}} (const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&hidden\+Layer\+Weights, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&output\+Layer\+Weights)
+\begin{DoxyCompactList}\small\item\em Sets the weights of the hidden and output layers. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_network_a016c286599aecac8fa11eeae2f75f68a}{predict}} (const std\+::vector$<$ double $>$ \&inputs)
+\begin{DoxyCompactList}\small\item\em Performs a forward pass through the network to predict the output for a given input. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_network_a31c57164e070bf83967d345e52d15969}{validate}} (const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&outputs)
+\begin{DoxyCompactList}\small\item\em Calculates the validation error for the network. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_network_aec7320f575d92e3bd886cc4e6dcd20bc}{mean\+Squared\+Error}} (const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&expected\+Outputs)
+\begin{DoxyCompactList}\small\item\em Calculates the mean squared error for the network. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_network_a3412f19e85b1e482cb9e99200e2997ac}{accuracy}} (const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&expected\+Outputs)
+\begin{DoxyCompactList}\small\item\em Calculates the accuracy of the network predictions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_network_a23ccdb444ec36fc94ca32df037006853}{train}} (const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&outputs, unsigned num\+Epochs, double learning\+Rate, double regularization\+Term, double validation\+Fraction, \mbox{\hyperlink{class_network_a29a3fa306540724f3a4890453a946134}{Training\+Callback}} callback)
+\begin{DoxyCompactList}\small\item\em Trains the network using the provided training data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_layer}{Layer}} $>$ \mbox{\hyperlink{class_network_a50f4a527788dfa71d67984a939ed3ee5}{layers}}
+\begin{DoxyCompactList}\small\item\em The layers of the network. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_network_8h_ada75dd7175e12c6d84eae069a51f23e2}{Optimization\+Method}} \mbox{\hyperlink{class_network_a0ab3d9dc9cb855cbb56b9babe456a9b5}{optimization\+Method}}
+\begin{DoxyCompactList}\small\item\em The optimization method used for training. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_network_a29a3fa306540724f3a4890453a946134}\label{class_network_a29a3fa306540724f3a4890453a946134}} 
+\index{Network@{Network}!TrainingCallback@{TrainingCallback}}
+\index{TrainingCallback@{TrainingCallback}!Network@{Network}}
+\doxysubsubsection{\texorpdfstring{TrainingCallback}{TrainingCallback}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_network_a29a3fa306540724f3a4890453a946134}{Network\+::\+Training\+Callback}} =  std\+::function$<$void(unsigned epoch, double error, double validation\+Error)$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_network_a70c2b99568130e8f2c6c691ba1e488ad}\label{class_network_a70c2b99568130e8f2c6c691ba1e488ad}} 
+\index{Network@{Network}!Network@{Network}}
+\index{Network@{Network}!Network@{Network}}
+\doxysubsubsection{\texorpdfstring{Network()}{Network()}}
+{\footnotesize\ttfamily Network\+::\+Network (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::pair$<$ unsigned int, \mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}{Activation\+Function\+Type}} $>$$>$}]{layer\+Config,  }\item[{\mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039}{Loss\+Function\+Type}}}]{loss\+Function = {\ttfamily \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039a6adf97f83acf6453d4a6a4b1070f3754}{Loss\+Function\+Type\+::\+None}}} }\end{DoxyParamCaption})}
+
+
+
+Constructs a new \mbox{\hyperlink{class_network}{Network}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em layer\+Config} & The configuration of the network layers, specifying the number of neurons in each layer and the activation function type. \\
+\hline
+{\em loss\+Function} & The loss function used by the network (optional). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_network_a3412f19e85b1e482cb9e99200e2997ac}\label{class_network_a3412f19e85b1e482cb9e99200e2997ac}} 
+\index{Network@{Network}!accuracy@{accuracy}}
+\index{accuracy@{accuracy}!Network@{Network}}
+\doxysubsubsection{\texorpdfstring{accuracy()}{accuracy()}}
+{\footnotesize\ttfamily double Network\+::accuracy (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{inputs,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{expected\+Outputs }\end{DoxyParamCaption})}
+
+
+
+Calculates the accuracy of the network predictions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The input samples. \\
+\hline
+{\em expected\+Outputs} & The expected output samples. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The accuracy of the network predictions. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_network_aec7320f575d92e3bd886cc4e6dcd20bc}\label{class_network_aec7320f575d92e3bd886cc4e6dcd20bc}} 
+\index{Network@{Network}!meanSquaredError@{meanSquaredError}}
+\index{meanSquaredError@{meanSquaredError}!Network@{Network}}
+\doxysubsubsection{\texorpdfstring{meanSquaredError()}{meanSquaredError()}}
+{\footnotesize\ttfamily double Network\+::mean\+Squared\+Error (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{inputs,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{expected\+Outputs }\end{DoxyParamCaption})}
+
+
+
+Calculates the mean squared error for the network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The input samples. \\
+\hline
+{\em expected\+Outputs} & The expected output samples. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The mean squared error. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_network_a016c286599aecac8fa11eeae2f75f68a}\label{class_network_a016c286599aecac8fa11eeae2f75f68a}} 
+\index{Network@{Network}!predict@{predict}}
+\index{predict@{predict}!Network@{Network}}
+\doxysubsubsection{\texorpdfstring{predict()}{predict()}}
+{\footnotesize\ttfamily std\+::vector$<$ double $>$ Network\+::predict (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{inputs }\end{DoxyParamCaption})}
+
+
+
+Performs a forward pass through the network to predict the output for a given input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The input values for the network. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$double$>$ The predicted output values. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_network_ac56e154f4302f8e5fdc2a86866c763c4}\label{class_network_ac56e154f4302f8e5fdc2a86866c763c4}} 
+\index{Network@{Network}!setWeights@{setWeights}}
+\index{setWeights@{setWeights}!Network@{Network}}
+\doxysubsubsection{\texorpdfstring{setWeights()}{setWeights()}}
+{\footnotesize\ttfamily void Network\+::set\+Weights (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{hidden\+Layer\+Weights,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{output\+Layer\+Weights }\end{DoxyParamCaption})}
+
+
+
+Sets the weights of the hidden and output layers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hidden\+Layer\+Weights} & The weights of the hidden layer neurons. \\
+\hline
+{\em output\+Layer\+Weights} & The weights of the output layer neurons. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_network_a23ccdb444ec36fc94ca32df037006853}\label{class_network_a23ccdb444ec36fc94ca32df037006853}} 
+\index{Network@{Network}!train@{train}}
+\index{train@{train}!Network@{Network}}
+\doxysubsubsection{\texorpdfstring{train()}{train()}}
+{\footnotesize\ttfamily void Network\+::train (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{inputs,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{outputs,  }\item[{unsigned}]{num\+Epochs,  }\item[{double}]{learning\+Rate,  }\item[{double}]{regularization\+Term,  }\item[{double}]{validation\+Fraction,  }\item[{\mbox{\hyperlink{class_network_a29a3fa306540724f3a4890453a946134}{Training\+Callback}}}]{callback }\end{DoxyParamCaption})}
+
+
+
+Trains the network using the provided training data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The input samples for training. \\
+\hline
+{\em outputs} & The expected output samples for training. \\
+\hline
+{\em num\+Epochs} & The number of training epochs. \\
+\hline
+{\em learning\+Rate} & The learning rate for weight adjustment. \\
+\hline
+{\em regularization\+Term} & The regularization term for weight adjustment. \\
+\hline
+{\em validation\+Fraction} & The fraction of data to be used for validation. \\
+\hline
+{\em callback} & The training callback function (optional). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_network_a31c57164e070bf83967d345e52d15969}\label{class_network_a31c57164e070bf83967d345e52d15969}} 
+\index{Network@{Network}!validate@{validate}}
+\index{validate@{validate}!Network@{Network}}
+\doxysubsubsection{\texorpdfstring{validate()}{validate()}}
+{\footnotesize\ttfamily double Network\+::validate (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{inputs,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{outputs }\end{DoxyParamCaption})}
+
+
+
+Calculates the validation error for the network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The input samples for validation. \\
+\hline
+{\em outputs} & The expected output samples for validation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The validation error. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_network_a50f4a527788dfa71d67984a939ed3ee5}\label{class_network_a50f4a527788dfa71d67984a939ed3ee5}} 
+\index{Network@{Network}!layers@{layers}}
+\index{layers@{layers}!Network@{Network}}
+\doxysubsubsection{\texorpdfstring{layers}{layers}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_layer}{Layer}}$>$ Network\+::layers\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The layers of the network. 
+
+\mbox{\Hypertarget{class_network_a0ab3d9dc9cb855cbb56b9babe456a9b5}\label{class_network_a0ab3d9dc9cb855cbb56b9babe456a9b5}} 
+\index{Network@{Network}!optimizationMethod@{optimizationMethod}}
+\index{optimizationMethod@{optimizationMethod}!Network@{Network}}
+\doxysubsubsection{\texorpdfstring{optimizationMethod}{optimizationMethod}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_network_8h_ada75dd7175e12c6d84eae069a51f23e2}{Optimization\+Method}} Network\+::optimization\+Method\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The optimization method used for training. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/brabo/\+Projetos/neural-\/network-\/cpp/src/\mbox{\hyperlink{_network_8h}{Network.\+h}}\item 
+/home/brabo/\+Projetos/neural-\/network-\/cpp/src/\mbox{\hyperlink{_network_8cpp}{Network.\+cpp}}\end{DoxyCompactItemize}

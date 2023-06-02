@@ -59,6 +59,9 @@ double Network::validate(const std::vector<std::vector<double>>& inputs,
 }
 double Network::meanSquaredError(const std::vector<std::vector<double>>& inputs,
                                  const std::vector<std::vector<double>>& expectedOutputs) {
+    if (inputs.size() != expectedOutputs.size() || inputs.empty()) {
+        throw std::invalid_argument("Invalid input or output vectors");
+    }
     double sumSquaredError = 0.0;
     for (size_t i = 0; i < inputs.size(); i++) {
         const std::vector<double>& input = inputs[i];
@@ -69,14 +72,43 @@ double Network::meanSquaredError(const std::vector<std::vector<double>>& inputs,
             double error = expectedOutput[j] - output[j];
             sumSquaredError += error * error;
         }
-        std::cout << "Sum squared error: " << sumSquaredError << std::endl;
     }
     return sumSquaredError / inputs.size();
 }
 
+double Network::accuracy(const std::vector<std::vector<double>>& inputs,
+                         const std::vector<std::vector<double>>& expectedOutputs) {
+    if (inputs.size() != expectedOutputs.size()) {
+        throw std::runtime_error("Mismatch in the number of input and output samples");
+    }
+
+    int correctPredictions = 0;
+    for (size_t i = 0; i < inputs.size(); i++) {
+        const std::vector<double>& input = inputs[i];
+        const std::vector<double>& expectedOutput = expectedOutputs[i];
+
+        // predict method returns the output probabilities
+        std::vector<double> outputProbabilities = predict(input);
+        int predictedClass =
+            std::max_element(outputProbabilities.begin(), outputProbabilities.end()) -
+            outputProbabilities.begin();
+
+        // expectedOutput is also probabilities, find index of the max
+        int expectedClass =
+            std::max_element(expectedOutput.begin(), expectedOutput.end()) - expectedOutput.begin();
+
+        if (predictedClass == expectedClass) {
+            correctPredictions++;
+        }
+    }
+
+    return static_cast<double>(correctPredictions) / inputs.size();
+}
+
 void Network::train(const std::vector<std::vector<double>>& inputs,
                     const std::vector<std::vector<double>>& outputs, unsigned numEpochs,
-                    double learningRate, double validationFraction, TrainingCallback callback) {
+                    double learningRate, double regularizationTerm, double validationFraction,
+                    TrainingCallback callback) {
     if (inputs.size() != outputs.size()) {
         throw std::runtime_error("Mismatch in the number of input and output samples");
     }
@@ -92,6 +124,12 @@ void Network::train(const std::vector<std::vector<double>>& inputs,
 
     if (!trainInputs.empty() && trainInputs[0].size() != layers[0].getInputSize()) {
         throw std::runtime_error("Mismatch in the input size and the expected number of inputs");
+    }
+
+    std::vector<std::vector<double>> layerDeltas(layers.size());
+    auto index = 0;
+    for (Layer& layer : layers) {
+        layerDeltas[index++].resize(layer.getOutputSize());
     }
 
     std::random_device rd;
@@ -112,6 +150,12 @@ void Network::train(const std::vector<std::vector<double>>& inputs,
             // Forward pass
             std::vector<double> layerOutputs = trainInputs[sampleIndices[i]];
 
+            // std::cout << "input: ";
+            // for (auto i = 0; i < layerOutputs.size(); i++) {
+            //     std::cout << layerOutputs[i] << " ";
+            // }
+            // std::cout << std::endl;
+            int k = 0;
             for (Layer& layer : layers) {
                 layerOutputs = layer.feedForward(layerOutputs);
             }
@@ -122,15 +166,13 @@ void Network::train(const std::vector<std::vector<double>>& inputs,
             totalError += error;
 
             // Backward pass
-            std::vector<std::vector<double>> layerDeltas(layers.size());
             for (int layerIndex = layers.size() - 1; layerIndex >= 0; layerIndex--) {
                 Layer& layer = layers[layerIndex];
 
-                layerDeltas[layerIndex].resize(layer.getOutputSize());
                 std::vector<double> output = layer.getOutputs();
                 if (layer.withSoftmax()) {
                     // Softmax with cross-entropy loss
-                    for (size_t j = 0; j < layer.getOutputSize(); j++) {
+                    for (size_t j = 0; j < layer.neurons.size(); j++) {
                         layerDeltas[layerIndex][j] = trainOutputs[sampleIndices[i]][j] - output[j];
                         if (std::isnan(layerDeltas[layerIndex][j])) {
                             throw std::runtime_error("NaN value in layer deltas (softmax)");
@@ -139,7 +181,7 @@ void Network::train(const std::vector<std::vector<double>>& inputs,
                 } else {
                     if (layerIndex == layers.size() - 1) {
                         // Special case for output layer
-                        for (size_t j = 0; j < layer.getOutputSize(); j++) {
+                        for (size_t j = 0; j < layer.neurons.size(); j++) {
                             layerDeltas[layerIndex][j] =
                                 (trainOutputs[sampleIndices[i]][j] - output[j]) *
                                 layer.activationDerivativeFunction(output[j]);
@@ -147,97 +189,77 @@ void Network::train(const std::vector<std::vector<double>>& inputs,
                                 throw std::runtime_error("NaN value in layer deltas (output)");
                             }
                         }
-                    } else {
-                        // Hidden layers
-                        double sum = 0.0;
+                    } else {  // Hidden layers
                         auto layerDeltaNextLayer = layerDeltas[layerIndex + 1];
 
-                        for (size_t k = 0; k < layer.getOutputSize(); k++) {
+                        for (size_t k = 0; k < layer.neurons.size(); k++) {
+                            double sum = 0.0;
+
                             for (size_t j = 0; j < layer.getInputSize(); j++) {
-                                sum += layer.neurons[k].weights[j] * layerDeltaNextLayer[k];
+                                sum += layer.neurons[k].getWeight(j) * layerDeltaNextLayer[j];
+
                                 if (std::isnan(sum)) {
                                     std::cout << "Layer index: " << layerIndex << std::endl;
                                     std::cout << "Neuron index: " << k << std::endl;
-                                    std::cout << "Weight: " << layer.neurons[k].weights[j]
+                                    std::cout << "Weight: " << layer.neurons[k].getWeight(j)
                                               << std::endl;
                                     std::cout
-                                        << "Layer delta next layer: " << layerDeltaNextLayer[k]
+                                        << "Layer delta next layer: " << layerDeltaNextLayer[j]
                                         << std::endl;
                                     throw std::runtime_error("NaN value in sum (hidden)");
                                 }
                             }
-                            auto activationDerivative =
+
+                            double activationDerivative =
                                 layer.activationDerivativeFunction(output[k]);
+                            // std::cout << "Activation derivative: " << activationDerivative
+                            //           << " | Output: " << output[k]
+                            //           << " | Layer index: " << layerIndex << std::endl;
                             layerDeltas[layerIndex][k] = sum * activationDerivative;
 
+                            // std::cout << "Layer index: " << layerIndex << std::endl;
+                            // std::cout << "Neuron index: " << k << std::endl;
+                            // std::cout << "Weights: ";
+                            // for (size_t j = 0; j < layer.getInputSize(); j++) {
+                            //     std::cout << layer.neurons[k].getWeight(j) << " ";
+                            // }
+                            // std::cout << std::endl;
+                            // std::cout << "Next layer deltas: ";
+                            // for (size_t j = 0; j < layerDeltaNextLayer.size(); j++) {
+                            //     std::cout << layerDeltaNextLayer[j] << " ";
+                            // }
+                            // std::cout << std::endl;
+                            // std::cout << "Layer delta: " << layerDeltas[layerIndex][k] <<
+                            // std::endl; std::cout << "Sum: " << sum << std::endl; std::cout <<
+                            // "Activation derivative: " << activationDerivative
+                            //           << std::endl;
                             if (std::isnan(layerDeltas[layerIndex][k])) {
-                                std::cout << "Layer index: " << layerIndex << std::endl;
-                                std::cout << "Neuron index: " << k << std::endl;
-                                std::cout << "Weights: ";
-                                for (size_t j = 0; j < layer.getInputSize(); j++) {
-                                    std::cout << layer.neurons[k].weights[j] << " ";
-                                }
-                                std::cout << std::endl;
-                                std::cout << "Next layer deltas: ";
-                                for (size_t j = 0; j < layerDeltaNextLayer.size(); j++) {
-                                    std::cout << layerDeltaNextLayer[j] << " ";
-                                }
-                                std::cout << std::endl;
-                                std::cout << "Layer delta: " << layerDeltas[layerIndex][k]
-                                          << std::endl;
-                                std::cout << "Sum: " << sum << std::endl;
-                                std::cout << "Activation derivative: " << activationDerivative
-                                          << std::endl;
                                 throw std::runtime_error("NaN value in layer deltas (hidden)");
                             }
                         }
                     }
                 }
 
-                std::vector<double> input;
-                if (layerIndex == 0) {
-                    input = trainInputs[sampleIndices[i]];
-                } else {
-                    input = layers[layerIndex - 1].getOutputs();
-                }
+                // std::cout << layerIndex << ") Layer delta: ";
+                // for (auto i = 0; i < layerDeltas[layerIndex].size(); i++) {
+                //     std::cout << layerDeltas[layerIndex][i] << " ";
+                // }
+                // std::cout << std::endl;
 
                 // Update weights
-                layer.adjustWeights(input, layerDeltas[layerIndex], learningRate);
+                layer.adjustWeights(layer.getInputValues(), layerDeltas[layerIndex], learningRate,
+                                    regularizationTerm);
             }
         }
         totalError /= trainInputs.size();
 
-        double validationError = validate(validationInputs, validationOutputs);
+        double validationError = 0.0;
+        if (!validationInputs.empty()) {
+            validationError = validate(validationInputs, validationOutputs);
+        }
 
         if (callback) {
             callback(epoch, totalError, validationError);
         }
     }
-}
-
-void Network::updateWeights(double learningRate, const std::vector<double>& hiddenGradients,
-                            const std::vector<double>& outputGradients) {
-    // Update output layer weights
-    // for (size_t i = 0; i < outputLayer.neurons.size(); i++) {
-    //     for (size_t j = 0; j < outputLayer.neurons[i].weights.size() - 1;
-    //          j++) {  // -1 to exclude bias
-    //         outputLayer.neurons[i].weights[j] +=
-    //             learningRate * outputGradients[i] *
-    //             hiddenLayer.neurons[j].feedForward(hiddenLayer.neurons[j].weights);
-    //     }
-    //     // Update output layer bias
-    //     outputLayer.neurons[i].weights.back() += learningRate * outputGradients[i];
-    // }
-
-    // // Update hidden layer weights
-    // for (size_t i = 0; i < hiddenLayer.neurons.size(); i++) {
-    //     for (size_t j = 0; j < hiddenLayer.neurons[i].weights.size() - 1;
-    //          j++) {  // -1 to exclude bias
-    //         hiddenLayer.neurons[i].weights[j] +=
-    //             learningRate * hiddenGradients[i] *
-    //             hiddenLayer.neurons[i].feedForward(hiddenLayer.neurons[i].weights);
-    //     }
-    //     // Update hidden layer bias
-    //     hiddenLayer.neurons[i].weights.back() += learningRate * hiddenGradients[i];
-    // }
 }

@@ -4,8 +4,13 @@
 
 Layer::Layer(unsigned int inputSize, unsigned int outputSize,
              ActivationFunctionType activationFunction, LossFunctionType lossFunction)
-        : neurons(outputSize, Neuron(inputSize)), m_lossFunction(lossFunction) {
-    m_outputs.resize(neurons.size());
+        : m_lossFunction(lossFunction) {
+    m_outputs.resize(outputSize);
+
+    for (size_t i = 0; i < outputSize; i++) {
+        m_outputs[i] = 0.0;
+        neurons.emplace_back(inputSize);
+    }
 
     if (activationFunction == ActivationFunctionType::Softmax) {
         m_withSoftmax = true;
@@ -31,6 +36,7 @@ Layer::LossFunction Layer::getLossFunction() {
 }
 
 std::vector<double> Layer::feedForward(const std::vector<double>& inputs) {
+    m_inputValues = inputs;  // save the inputs
     for (size_t i = 0; i < neurons.size(); i++) {
         m_outputs[i] = neurons[i].feedForward(inputs);
     }
@@ -45,22 +51,27 @@ std::vector<double> Layer::feedForward(const std::vector<double>& inputs) {
 
     return m_outputs;
 }
+
 std::vector<double> Layer::getOutputs() {
     return m_outputs;
+}
+
+std::vector<double> Layer::getInputValues() const {
+    return m_inputValues;
 }
 
 std::vector<std::vector<double>> Layer::getWeights() {
     std::vector<std::vector<double>> weights(neurons.size());
     for (size_t i = 0; i < neurons.size(); i++) {
-        weights[i] = neurons[i].weights;
+        weights[i] = neurons[i].getWeights();
     }
     return weights;
 }
 
 void Layer::adjustWeights(const std::vector<double>& inputs, const std::vector<double>& deltas,
-                          double learningRate) {
+                          double learningRate, double regularizationTerm) {
     for (size_t i = 0; i < neurons.size(); i++) {
-        neurons[i].adjustWeights(inputs, deltas[i], learningRate);
+        neurons[i].adjustWeights(inputs, deltas[i], learningRate, regularizationTerm);
     }
 }
 
@@ -97,5 +108,5 @@ size_t Layer::getOutputSize() {
 }
 
 size_t Layer::getInputSize() {
-    return neurons[0].weights.size();
+    return neurons[0].getWeights().size();
 }

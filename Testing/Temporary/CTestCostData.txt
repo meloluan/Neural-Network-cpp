@@ -1,3 +1,20 @@
-PCATest.DimensionalityReduction 1 0.00869286
-neural-network-cpp-test 1 0.00164258
+LayerTest.FeedForward 5 0.000411948
+LayerTest.AdjustWeights 5 0.000384908
+LayerTest.ActivationFunction 5 0.000372404
+LayerTest.ActivationDerivativeFunction 5 0.000357591
+LayerTest.GetOutputs 5 0.000570862
+LayerTest.GetLossFunction 5 0.000357967
+LayerTest.GetOutputSize 5 0.000318523
+LayerTest.GetInputSize 5 0.000325814
+LayerTest.WithSoftmax 5 0.000315615
+NetworkTest.Predict 5 0.000307944
+NetworkTest.Validate 5 0.000317296
+NetworkTest.MeanSquaredError 5 0.000297675
+NetworkTest.Train 5 0.000366592
+NeuronTest.FeedForward 5 0.000323852
+NeuronTest.AdjustWeights 5 0.000320551
+PCATest.DimensionalityReduction 5 0.000313556
+NeuralNetworkCpp-test 0 0
+NeuralNetworkCppTest 0 0
 ---
+NeuralNetworkCppTest

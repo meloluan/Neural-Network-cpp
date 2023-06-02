@@ -1,0 +1,154 @@
+\hypertarget{class_neuron}{}\doxysection{Neuron Class Reference}
+\label{class_neuron}\index{Neuron@{Neuron}}
+
+
+{\ttfamily \#include $<$Neuron.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_neuron_afc94e964a9171f66f7267f65c41d78fb}{Neuron}} (unsigned num\+Inputs)
+\item 
+double \mbox{\hyperlink{class_neuron_ad047f9aeecfa5e987aafd469b0f9ddf4}{feed\+Forward}} (const std\+::vector$<$ double $>$ \&inputs) const
+\item 
+void \mbox{\hyperlink{class_neuron_accce863904bb8e2ae17c599005c4a944}{adjust\+Weights}} (const std\+::vector$<$ double $>$ \&inputs, double delta, double learning\+Rate, double regularization\+Term)
+\item 
+void \mbox{\hyperlink{class_neuron_a12fb4e29a93bf2bda8b5875ad5c09e0b}{set\+Bias}} (double bias)
+\item 
+double \mbox{\hyperlink{class_neuron_a2ca310c4c6644a8a9636d303d7b6f7f6}{get\+Weight}} (unsigned index) const
+\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_neuron_a7fc6bf7e84adf04291f76574d926f7fd}{get\+Weights}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_neuron_a921d76b8b07b3ae3573c5a81321f0865}{m\+\_\+weights}}
+\begin{DoxyCompactList}\small\item\em The weights of the neuron. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_neuron_abfb2ada794167af5a07876149d90a1b7}{m\+\_\+bias}}
+\begin{DoxyCompactList}\small\item\em The bias of the neuron. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents a single \mbox{\hyperlink{class_neuron}{Neuron}} in a Neural \mbox{\hyperlink{class_network}{Network}} \mbox{\hyperlink{class_layer}{Layer}}. It contains weights, bias and the functionalities to adjust them. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_neuron_afc94e964a9171f66f7267f65c41d78fb}\label{class_neuron_afc94e964a9171f66f7267f65c41d78fb}} 
+\index{Neuron@{Neuron}!Neuron@{Neuron}}
+\index{Neuron@{Neuron}!Neuron@{Neuron}}
+\doxysubsubsection{\texorpdfstring{Neuron()}{Neuron()}}
+{\footnotesize\ttfamily Neuron\+::\+Neuron (\begin{DoxyParamCaption}\item[{unsigned}]{num\+Inputs }\end{DoxyParamCaption})}
+
+Construct a new \mbox{\hyperlink{class_neuron}{Neuron}} object
+
+
+\begin{DoxyParams}{Parameters}
+{\em num\+Inputs} & The number of input connections to the neuron \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_neuron_accce863904bb8e2ae17c599005c4a944}\label{class_neuron_accce863904bb8e2ae17c599005c4a944}} 
+\index{Neuron@{Neuron}!adjustWeights@{adjustWeights}}
+\index{adjustWeights@{adjustWeights}!Neuron@{Neuron}}
+\doxysubsubsection{\texorpdfstring{adjustWeights()}{adjustWeights()}}
+{\footnotesize\ttfamily void Neuron\+::adjust\+Weights (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{inputs,  }\item[{double}]{delta,  }\item[{double}]{learning\+Rate,  }\item[{double}]{regularization\+Term }\end{DoxyParamCaption})}
+
+Adjusts the weights and bias of the neuron based on the error, inputs and learning rate.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & Input values \\
+\hline
+{\em delta} & The error delta \\
+\hline
+{\em learning\+Rate} & The learning rate for weight adjustment \\
+\hline
+{\em regularization\+Term} & The regularization term used for L2 regularization \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_neuron_ad047f9aeecfa5e987aafd469b0f9ddf4}\label{class_neuron_ad047f9aeecfa5e987aafd469b0f9ddf4}} 
+\index{Neuron@{Neuron}!feedForward@{feedForward}}
+\index{feedForward@{feedForward}!Neuron@{Neuron}}
+\doxysubsubsection{\texorpdfstring{feedForward()}{feedForward()}}
+{\footnotesize\ttfamily double Neuron\+::feed\+Forward (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{inputs }\end{DoxyParamCaption}) const}
+
+Feed-\/forward operation for a neuron. It calculates the weighted sum of inputs and bias.
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & Input values \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double Weighted sum of inputs and bias 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_neuron_a2ca310c4c6644a8a9636d303d7b6f7f6}\label{class_neuron_a2ca310c4c6644a8a9636d303d7b6f7f6}} 
+\index{Neuron@{Neuron}!getWeight@{getWeight}}
+\index{getWeight@{getWeight}!Neuron@{Neuron}}
+\doxysubsubsection{\texorpdfstring{getWeight()}{getWeight()}}
+{\footnotesize\ttfamily double Neuron\+::get\+Weight (\begin{DoxyParamCaption}\item[{unsigned}]{index }\end{DoxyParamCaption}) const}
+
+Gets the weight at a specific index
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the weight \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The weight value at the given index 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_neuron_a7fc6bf7e84adf04291f76574d926f7fd}\label{class_neuron_a7fc6bf7e84adf04291f76574d926f7fd}} 
+\index{Neuron@{Neuron}!getWeights@{getWeights}}
+\index{getWeights@{getWeights}!Neuron@{Neuron}}
+\doxysubsubsection{\texorpdfstring{getWeights()}{getWeights()}}
+{\footnotesize\ttfamily std\+::vector$<$ double $>$ Neuron\+::get\+Weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Gets the weights of the neuron
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$double$>$ The weights of the neuron 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_neuron_a12fb4e29a93bf2bda8b5875ad5c09e0b}\label{class_neuron_a12fb4e29a93bf2bda8b5875ad5c09e0b}} 
+\index{Neuron@{Neuron}!setBias@{setBias}}
+\index{setBias@{setBias}!Neuron@{Neuron}}
+\doxysubsubsection{\texorpdfstring{setBias()}{setBias()}}
+{\footnotesize\ttfamily void Neuron\+::set\+Bias (\begin{DoxyParamCaption}\item[{double}]{bias }\end{DoxyParamCaption})}
+
+Sets the bias of the neuron to a specific value
+
+
+\begin{DoxyParams}{Parameters}
+{\em bias} & The new bias value \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_neuron_abfb2ada794167af5a07876149d90a1b7}\label{class_neuron_abfb2ada794167af5a07876149d90a1b7}} 
+\index{Neuron@{Neuron}!m\_bias@{m\_bias}}
+\index{m\_bias@{m\_bias}!Neuron@{Neuron}}
+\doxysubsubsection{\texorpdfstring{m\_bias}{m\_bias}}
+{\footnotesize\ttfamily double Neuron\+::m\+\_\+bias\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The bias of the neuron. 
+
+\mbox{\Hypertarget{class_neuron_a921d76b8b07b3ae3573c5a81321f0865}\label{class_neuron_a921d76b8b07b3ae3573c5a81321f0865}} 
+\index{Neuron@{Neuron}!m\_weights@{m\_weights}}
+\index{m\_weights@{m\_weights}!Neuron@{Neuron}}
+\doxysubsubsection{\texorpdfstring{m\_weights}{m\_weights}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ Neuron\+::m\+\_\+weights\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The weights of the neuron. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/brabo/\+Projetos/neural-\/network-\/cpp/src/\mbox{\hyperlink{_neuron_8h}{Neuron.\+h}}\item 
+/home/brabo/\+Projetos/neural-\/network-\/cpp/src/\mbox{\hyperlink{_neuron_8cpp}{Neuron.\+cpp}}\end{DoxyCompactItemize}

@@ -49,3 +49,12 @@ CMakeFiles
 **Makefile
 cmake_install.cmake
 install_manifest.txt
+
+bin/
+build/
+CMakeFiles/
+*.cmake
+Makefile
+cmake_install.cmake
+.vscode/
+Testing/

@@ -1,0 +1,376 @@
+\hypertarget{class_layer}{}\doxysection{Layer Class Reference}
+\label{class_layer}\index{Layer@{Layer}}
+
+
+{\ttfamily \#include $<$Layer.\+h$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_layer_ae808f41deea30ca5205e927185f56b6e}{Activation}} = std\+::function$<$ double(double)$>$
+\item 
+using \mbox{\hyperlink{class_layer_a9500b288e7442d7b7a5df61c59c30c61}{Loss\+Function}} = std\+::function$<$ double(const std\+::vector$<$ double $>$ \&, const std\+::vector$<$ double $>$ \&)$>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_layer_a3cb5c5301f498e4306f87e30ad37a62c}{Layer}} (unsigned int input\+Size, unsigned int output\+Size, \mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}{Activation\+Function\+Type}} \mbox{\hyperlink{class_layer_a3c4620f789245079428f13403e989ac4}{activation\+Function}}, \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039}{Loss\+Function\+Type}} loss\+Function=\mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039a6adf97f83acf6453d4a6a4b1070f3754}{Loss\+Function\+Type\+::\+None}})
+\begin{DoxyCompactList}\small\item\em Constructs a new \mbox{\hyperlink{class_layer}{Layer}} object. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_layer_ac4552fe33df9255f147092051147ebb4}{feed\+Forward}} (const std\+::vector$<$ double $>$ \&inputs)
+\begin{DoxyCompactList}\small\item\em Performs feed-\/forward computation for the layer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_layer_a02da0e5299913638718e5b8989484a10}{adjust\+Weights}} (const std\+::vector$<$ double $>$ \&inputs, const std\+::vector$<$ double $>$ \&deltas, double learning\+Rate, double regularization\+Term)
+\begin{DoxyCompactList}\small\item\em Adjusts the weights of the neurons in the layer based on the error deltas. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_layer_a3c4620f789245079428f13403e989ac4}{activation\+Function}} (double input)
+\begin{DoxyCompactList}\small\item\em Computes the output of the activation function for a given input. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_layer_aa998439c5410b546b86fbf055deb5851}{activation\+Derivative\+Function}} (double input)
+\begin{DoxyCompactList}\small\item\em Computes the derivative of the activation function for a given input. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_layer_a531c39ee6488d81c8888f786162ddf13}{get\+Outputs}} ()
+\begin{DoxyCompactList}\small\item\em Returns the output values of the layer. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_layer_af986856a6906c3c815287277d2bdc9be}{get\+Input\+Values}} () const
+\begin{DoxyCompactList}\small\item\em Returns the input values of the layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_layer_a9500b288e7442d7b7a5df61c59c30c61}{Loss\+Function}} \mbox{\hyperlink{class_layer_a96fec21473242bba52e406636e9b8007}{get\+Loss\+Function}} ()
+\begin{DoxyCompactList}\small\item\em Returns the loss function used by the layer. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{class_layer_a7093bc2452034c3a9f05891d32f919e1}{get\+Output\+Size}} ()
+\begin{DoxyCompactList}\small\item\em Returns the size of the output from the layer. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{class_layer_af3c2bd25e8cc22736f004b5eb02919d6}{get\+Input\+Size}} ()
+\begin{DoxyCompactList}\small\item\em Returns the size of the input to the layer. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ double $>$ $>$ \mbox{\hyperlink{class_layer_a9a41fe30eaf4abdfdd4ddb4fd4d18342}{get\+Weights}} ()
+\begin{DoxyCompactList}\small\item\em Returns the weights of the neurons in the layer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_layer_a70e896e19216c7bb9290c20f65e39ec7}{with\+Softmax}} ()
+\begin{DoxyCompactList}\small\item\em Checks if the layer uses the softmax activation function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_neuron}{Neuron}} $>$ \mbox{\hyperlink{class_layer_a093abcdd79ba1cbdad598d424a7a2edd}{neurons}}
+\begin{DoxyCompactList}\small\item\em The neurons in the layer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::pair$<$ \mbox{\hyperlink{class_layer_ae808f41deea30ca5205e927185f56b6e}{Activation}}, \mbox{\hyperlink{class_layer_ae808f41deea30ca5205e927185f56b6e}{Activation}} $>$ \mbox{\hyperlink{class_layer_af5f17968c448a0ba86aab2906fdfff4e}{get\+Activation\+Functions}} (\mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}{Activation\+Function\+Type}} \mbox{\hyperlink{class_layer_a3c4620f789245079428f13403e989ac4}{activation\+Function}})
+\begin{DoxyCompactList}\small\item\em Retrieves the activation and derivative functions for a given activation function type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_layer_ae808f41deea30ca5205e927185f56b6e}{Activation}} \mbox{\hyperlink{class_layer_aaeacd6e8af9e72f199f9633c53f13e59}{activation}}
+\begin{DoxyCompactList}\small\item\em The activation function of the layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_layer_ae808f41deea30ca5205e927185f56b6e}{Activation}} \mbox{\hyperlink{class_layer_a13eee7c2cd70624b083a2df98fa34591}{activation\+Derivative}}
+\begin{DoxyCompactList}\small\item\em The derivative of the activation function of the layer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039}{Loss\+Function\+Type}} \mbox{\hyperlink{class_layer_a168473e540d775b12c58828c1909dccc}{m\+\_\+loss\+Function}}
+\begin{DoxyCompactList}\small\item\em The loss function used by the layer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_layer_a446308491ea17f3b06c9789db62b96b7}{m\+\_\+with\+Softmax}} = false
+\begin{DoxyCompactList}\small\item\em Flag indicating if the layer uses softmax activation. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_layer_ae4b5ba9bd1f6c6d94bc9674581aca88e}{m\+\_\+outputs}}
+\begin{DoxyCompactList}\small\item\em The output values of the layer. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_layer_aeb132c4799fd363f9162fdf069b8aa00}{m\+\_\+input\+Values}}
+\begin{DoxyCompactList}\small\item\em The input values of the layer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_layer_ae808f41deea30ca5205e927185f56b6e}\label{class_layer_ae808f41deea30ca5205e927185f56b6e}} 
+\index{Layer@{Layer}!Activation@{Activation}}
+\index{Activation@{Activation}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{Activation}{Activation}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_layer_ae808f41deea30ca5205e927185f56b6e}{Layer\+::\+Activation}} =  std\+::function$<$double(double)$>$}
+
+\mbox{\Hypertarget{class_layer_a9500b288e7442d7b7a5df61c59c30c61}\label{class_layer_a9500b288e7442d7b7a5df61c59c30c61}} 
+\index{Layer@{Layer}!LossFunction@{LossFunction}}
+\index{LossFunction@{LossFunction}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{LossFunction}{LossFunction}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_layer_a9500b288e7442d7b7a5df61c59c30c61}{Layer\+::\+Loss\+Function}} =  std\+::function$<$double(const std\+::vector$<$double$>$\&, const std\+::vector$<$double$>$\&)$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_layer_a3cb5c5301f498e4306f87e30ad37a62c}\label{class_layer_a3cb5c5301f498e4306f87e30ad37a62c}} 
+\index{Layer@{Layer}!Layer@{Layer}}
+\index{Layer@{Layer}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{Layer()}{Layer()}}
+{\footnotesize\ttfamily Layer\+::\+Layer (\begin{DoxyParamCaption}\item[{unsigned int}]{input\+Size,  }\item[{unsigned int}]{output\+Size,  }\item[{\mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}{Activation\+Function\+Type}}}]{activation\+Function,  }\item[{\mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039}{Loss\+Function\+Type}}}]{loss\+Function = {\ttfamily \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039a6adf97f83acf6453d4a6a4b1070f3754}{Loss\+Function\+Type\+::\+None}}} }\end{DoxyParamCaption})}
+
+
+
+Constructs a new \mbox{\hyperlink{class_layer}{Layer}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+Size} & The size of the input to the layer. \\
+\hline
+{\em output\+Size} & The size of the output from the layer. \\
+\hline
+{\em activation\+Function} & The activation function to be used by the layer. \\
+\hline
+{\em loss\+Function} & The loss function to be used for the layer (optional). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_layer_aa998439c5410b546b86fbf055deb5851}\label{class_layer_aa998439c5410b546b86fbf055deb5851}} 
+\index{Layer@{Layer}!activationDerivativeFunction@{activationDerivativeFunction}}
+\index{activationDerivativeFunction@{activationDerivativeFunction}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{activationDerivativeFunction()}{activationDerivativeFunction()}}
+{\footnotesize\ttfamily double Layer\+::activation\+Derivative\+Function (\begin{DoxyParamCaption}\item[{double}]{input }\end{DoxyParamCaption})}
+
+
+
+Computes the derivative of the activation function for a given input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input value to the activation function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The derivative value of the activation function. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layer_a3c4620f789245079428f13403e989ac4}\label{class_layer_a3c4620f789245079428f13403e989ac4}} 
+\index{Layer@{Layer}!activationFunction@{activationFunction}}
+\index{activationFunction@{activationFunction}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{activationFunction()}{activationFunction()}}
+{\footnotesize\ttfamily double Layer\+::activation\+Function (\begin{DoxyParamCaption}\item[{double}]{input }\end{DoxyParamCaption})}
+
+
+
+Computes the output of the activation function for a given input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & The input value to the activation function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The output value of the activation function. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layer_a02da0e5299913638718e5b8989484a10}\label{class_layer_a02da0e5299913638718e5b8989484a10}} 
+\index{Layer@{Layer}!adjustWeights@{adjustWeights}}
+\index{adjustWeights@{adjustWeights}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{adjustWeights()}{adjustWeights()}}
+{\footnotesize\ttfamily void Layer\+::adjust\+Weights (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{inputs,  }\item[{const std\+::vector$<$ double $>$ \&}]{deltas,  }\item[{double}]{learning\+Rate,  }\item[{double}]{regularization\+Term }\end{DoxyParamCaption})}
+
+
+
+Adjusts the weights of the neurons in the layer based on the error deltas. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The input values for the layer. \\
+\hline
+{\em deltas} & The error deltas for the layer. \\
+\hline
+{\em learning\+Rate} & The learning rate for weight adjustment. \\
+\hline
+{\em regularization\+Term} & The regularization term used for weight adjustment. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_layer_ac4552fe33df9255f147092051147ebb4}\label{class_layer_ac4552fe33df9255f147092051147ebb4}} 
+\index{Layer@{Layer}!feedForward@{feedForward}}
+\index{feedForward@{feedForward}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{feedForward()}{feedForward()}}
+{\footnotesize\ttfamily std\+::vector$<$ double $>$ Layer\+::feed\+Forward (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{inputs }\end{DoxyParamCaption})}
+
+
+
+Performs feed-\/forward computation for the layer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The input values for the layer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$double$>$ The output values of the layer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layer_af5f17968c448a0ba86aab2906fdfff4e}\label{class_layer_af5f17968c448a0ba86aab2906fdfff4e}} 
+\index{Layer@{Layer}!getActivationFunctions@{getActivationFunctions}}
+\index{getActivationFunctions@{getActivationFunctions}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{getActivationFunctions()}{getActivationFunctions()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{class_layer_ae808f41deea30ca5205e927185f56b6e}{Layer\+::\+Activation}}, \mbox{\hyperlink{class_layer_ae808f41deea30ca5205e927185f56b6e}{Layer\+::\+Activation}} $>$ Layer\+::get\+Activation\+Functions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}{Activation\+Function\+Type}}}]{activation\+Function }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Retrieves the activation and derivative functions for a given activation function type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em activation\+Function} & The activation function type. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::pair$<$\+Activation, Activation$>$ The activation and derivative functions. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layer_af3c2bd25e8cc22736f004b5eb02919d6}\label{class_layer_af3c2bd25e8cc22736f004b5eb02919d6}} 
+\index{Layer@{Layer}!getInputSize@{getInputSize}}
+\index{getInputSize@{getInputSize}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{getInputSize()}{getInputSize()}}
+{\footnotesize\ttfamily size\+\_\+t Layer\+::get\+Input\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the size of the input to the layer. 
+
+\begin{DoxyReturn}{Returns}
+size\+\_\+t The size of the input to the layer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layer_af986856a6906c3c815287277d2bdc9be}\label{class_layer_af986856a6906c3c815287277d2bdc9be}} 
+\index{Layer@{Layer}!getInputValues@{getInputValues}}
+\index{getInputValues@{getInputValues}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{getInputValues()}{getInputValues()}}
+{\footnotesize\ttfamily std\+::vector$<$ double $>$ Layer\+::get\+Input\+Values (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns the input values of the layer. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$double$>$ The input values of the layer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layer_a96fec21473242bba52e406636e9b8007}\label{class_layer_a96fec21473242bba52e406636e9b8007}} 
+\index{Layer@{Layer}!getLossFunction@{getLossFunction}}
+\index{getLossFunction@{getLossFunction}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{getLossFunction()}{getLossFunction()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layer_a9500b288e7442d7b7a5df61c59c30c61}{Layer\+::\+Loss\+Function}} Layer\+::get\+Loss\+Function (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the loss function used by the layer. 
+
+\begin{DoxyReturn}{Returns}
+Loss\+Function The loss function used by the layer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layer_a531c39ee6488d81c8888f786162ddf13}\label{class_layer_a531c39ee6488d81c8888f786162ddf13}} 
+\index{Layer@{Layer}!getOutputs@{getOutputs}}
+\index{getOutputs@{getOutputs}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{getOutputs()}{getOutputs()}}
+{\footnotesize\ttfamily std\+::vector$<$ double $>$ Layer\+::get\+Outputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the output values of the layer. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$double$>$ The output values of the layer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layer_a7093bc2452034c3a9f05891d32f919e1}\label{class_layer_a7093bc2452034c3a9f05891d32f919e1}} 
+\index{Layer@{Layer}!getOutputSize@{getOutputSize}}
+\index{getOutputSize@{getOutputSize}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{getOutputSize()}{getOutputSize()}}
+{\footnotesize\ttfamily size\+\_\+t Layer\+::get\+Output\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the size of the output from the layer. 
+
+\begin{DoxyReturn}{Returns}
+size\+\_\+t The size of the output from the layer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layer_a9a41fe30eaf4abdfdd4ddb4fd4d18342}\label{class_layer_a9a41fe30eaf4abdfdd4ddb4fd4d18342}} 
+\index{Layer@{Layer}!getWeights@{getWeights}}
+\index{getWeights@{getWeights}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{getWeights()}{getWeights()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ double $>$ $>$ Layer\+::get\+Weights (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the weights of the neurons in the layer. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$std\+::vector$<$double$>$$>$ The weights of the neurons in the layer. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_layer_a70e896e19216c7bb9290c20f65e39ec7}\label{class_layer_a70e896e19216c7bb9290c20f65e39ec7}} 
+\index{Layer@{Layer}!withSoftmax@{withSoftmax}}
+\index{withSoftmax@{withSoftmax}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{withSoftmax()}{withSoftmax()}}
+{\footnotesize\ttfamily bool Layer\+::with\+Softmax (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Checks if the layer uses the softmax activation function. 
+
+\begin{DoxyReturn}{Returns}
+bool True if the layer uses softmax, false otherwise. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_layer_aaeacd6e8af9e72f199f9633c53f13e59}\label{class_layer_aaeacd6e8af9e72f199f9633c53f13e59}} 
+\index{Layer@{Layer}!activation@{activation}}
+\index{activation@{activation}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{activation}{activation}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layer_ae808f41deea30ca5205e927185f56b6e}{Activation}} Layer\+::activation\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The activation function of the layer. 
+
+\mbox{\Hypertarget{class_layer_a13eee7c2cd70624b083a2df98fa34591}\label{class_layer_a13eee7c2cd70624b083a2df98fa34591}} 
+\index{Layer@{Layer}!activationDerivative@{activationDerivative}}
+\index{activationDerivative@{activationDerivative}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{activationDerivative}{activationDerivative}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_layer_ae808f41deea30ca5205e927185f56b6e}{Activation}} Layer\+::activation\+Derivative\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The derivative of the activation function of the layer. 
+
+\mbox{\Hypertarget{class_layer_aeb132c4799fd363f9162fdf069b8aa00}\label{class_layer_aeb132c4799fd363f9162fdf069b8aa00}} 
+\index{Layer@{Layer}!m\_inputValues@{m\_inputValues}}
+\index{m\_inputValues@{m\_inputValues}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{m\_inputValues}{m\_inputValues}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ Layer\+::m\+\_\+input\+Values\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The input values of the layer. 
+
+\mbox{\Hypertarget{class_layer_a168473e540d775b12c58828c1909dccc}\label{class_layer_a168473e540d775b12c58828c1909dccc}} 
+\index{Layer@{Layer}!m\_lossFunction@{m\_lossFunction}}
+\index{m\_lossFunction@{m\_lossFunction}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{m\_lossFunction}{m\_lossFunction}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039}{Loss\+Function\+Type}} Layer\+::m\+\_\+loss\+Function\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{        \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039a6adf97f83acf6453d4a6a4b1070f3754}{LossFunctionType::None}}}
+
+\end{DoxyCode}
+
+
+The loss function used by the layer. 
+
+\mbox{\Hypertarget{class_layer_ae4b5ba9bd1f6c6d94bc9674581aca88e}\label{class_layer_ae4b5ba9bd1f6c6d94bc9674581aca88e}} 
+\index{Layer@{Layer}!m\_outputs@{m\_outputs}}
+\index{m\_outputs@{m\_outputs}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{m\_outputs}{m\_outputs}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ Layer\+::m\+\_\+outputs\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The output values of the layer. 
+
+\mbox{\Hypertarget{class_layer_a446308491ea17f3b06c9789db62b96b7}\label{class_layer_a446308491ea17f3b06c9789db62b96b7}} 
+\index{Layer@{Layer}!m\_withSoftmax@{m\_withSoftmax}}
+\index{m\_withSoftmax@{m\_withSoftmax}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{m\_withSoftmax}{m\_withSoftmax}}
+{\footnotesize\ttfamily bool Layer\+::m\+\_\+with\+Softmax = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Flag indicating if the layer uses softmax activation. 
+
+\mbox{\Hypertarget{class_layer_a093abcdd79ba1cbdad598d424a7a2edd}\label{class_layer_a093abcdd79ba1cbdad598d424a7a2edd}} 
+\index{Layer@{Layer}!neurons@{neurons}}
+\index{neurons@{neurons}!Layer@{Layer}}
+\doxysubsubsection{\texorpdfstring{neurons}{neurons}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_neuron}{Neuron}}$>$ Layer\+::neurons}
+
+
+
+The neurons in the layer. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/brabo/\+Projetos/neural-\/network-\/cpp/src/\mbox{\hyperlink{_layer_8h}{Layer.\+h}}\item 
+/home/brabo/\+Projetos/neural-\/network-\/cpp/src/\mbox{\hyperlink{_layer_8cpp}{Layer.\+cpp}}\end{DoxyCompactItemize}

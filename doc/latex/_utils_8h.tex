@@ -1,0 +1,31 @@
+\hypertarget{_utils_8h}{}\doxysection{/home/brabo/\+Projetos/neural-\/network-\/cpp/src/\+Utils.h File Reference}
+\label{_utils_8h}\index{/home/brabo/Projetos/neural-\/network-\/cpp/src/Utils.h@{/home/brabo/Projetos/neural-\/network-\/cpp/src/Utils.h}}
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_utils}{Utils}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{namespace_utils_a1afccb336e98379f33ea043d793fbeee}{Utils\+::get\+Random}} ()
+\begin{DoxyCompactList}\small\item\em Generates a random number between 0 and 1. \end{DoxyCompactList}\item 
+static std\+::vector$<$ double $>$ \mbox{\hyperlink{namespace_utils_a888a98248550e161b7ead8e325747ae3}{Utils\+::normalize}} (const std\+::vector$<$ double $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Normalizes a vector of data to have a mean of 0 and standard deviation of 1. \end{DoxyCompactList}\item 
+static std\+::vector$<$ double $>$ \mbox{\hyperlink{namespace_utils_aa4acce7172d9170ec629c12cc1add848}{Utils\+::to\+Vector}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&image)
+\begin{DoxyCompactList}\small\item\em Converts a 28x28 image into a vector of size 784. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{namespace_utils_a84d3a65643c619d912c61376a773fa59}{Utils\+::max\+Index}} (const std\+::vector$<$ double $>$ \&output)
+\begin{DoxyCompactList}\small\item\em Returns the index of the maximum value in a vector. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{namespace_utils_a6d9bdc380040fd26cf270e065b46612b}{Utils\+::mse}} (std\+::vector$<$ double $>$ expected, std\+::vector$<$ double $>$ actual)
+\begin{DoxyCompactList}\small\item\em Calculates the mean squared error (MSE) between two vectors. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{namespace_utils_a724d6cc466c6a156307bdd717327537b}{Utils\+::split\+Data}} (const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&outputs, double validation\+Fraction, std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&train\+Inputs, std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&train\+Outputs, std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&val\+Inputs, std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&val\+Outputs)
+\begin{DoxyCompactList}\small\item\em Splits the input and output data into training and validation sets. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{namespace_utils_a16b346b8abcbc6a8b21b44cc3edf74b0}{Utils\+::test\+Accuracy}} (\mbox{\hyperlink{class_network}{Network}} \&nn, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&expected\+Outputs)
+\begin{DoxyCompactList}\small\item\em Calculates the accuracy of a network on a given dataset. \end{DoxyCompactList}\end{DoxyCompactItemize}

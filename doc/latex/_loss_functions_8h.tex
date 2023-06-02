@@ -1,0 +1,20 @@
+\hypertarget{_loss_functions_8h}{}\doxysection{/home/brabo/\+Projetos/neural-\/network-\/cpp/src/\+Loss\+Functions.h File Reference}
+\label{_loss_functions_8h}\index{/home/brabo/Projetos/neural-\/network-\/cpp/src/LossFunctions.h@{/home/brabo/Projetos/neural-\/network-\/cpp/src/LossFunctions.h}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}Layer.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Network.\+h\char`\"{}}\newline
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespace_loss_functions}{Loss\+Functions}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{namespace_loss_functions_a426ed624070c659aa68f8b73e3c2e9d5}{Loss\+Functions\+::mean\+Squared\+Error\+Loss}} (const std\+::vector$<$ double $>$ \&expected\+Outputs, const std\+::vector$<$ double $>$ \&forward\+Output)
+\begin{DoxyCompactList}\small\item\em Calculates the mean squared error loss between the expected outputs and the forward output. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{namespace_loss_functions_a2213a3103ee924258055014039a80f99}{Loss\+Functions\+::cross\+Entropy\+Loss}} (const std\+::vector$<$ double $>$ \&expected\+Outputs, const std\+::vector$<$ double $>$ \&forward\+Output)
+\begin{DoxyCompactList}\small\item\em Calculates the cross-\/entropy loss between the expected outputs and the forward output. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{namespace_loss_functions_a8da915309c176064d2a871a04e4d1dd5}{Loss\+Functions\+::binary\+Cross\+Entropy\+Loss}} (const std\+::vector$<$ double $>$ \&expected\+Outputs, const std\+::vector$<$ double $>$ \&forward\+Output)
+\begin{DoxyCompactList}\small\item\em Calculates the binary cross-\/entropy loss between the expected outputs and the forward output. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,163 @@
+\hypertarget{namespace_utils}{}\doxysection{Utils Namespace Reference}
+\label{namespace_utils}\index{Utils@{Utils}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{namespace_utils_a1afccb336e98379f33ea043d793fbeee}{get\+Random}} ()
+\begin{DoxyCompactList}\small\item\em Generates a random number between 0 and 1. \end{DoxyCompactList}\item 
+static std\+::vector$<$ double $>$ \mbox{\hyperlink{namespace_utils_a888a98248550e161b7ead8e325747ae3}{normalize}} (const std\+::vector$<$ double $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Normalizes a vector of data to have a mean of 0 and standard deviation of 1. \end{DoxyCompactList}\item 
+static std\+::vector$<$ double $>$ \mbox{\hyperlink{namespace_utils_aa4acce7172d9170ec629c12cc1add848}{to\+Vector}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&image)
+\begin{DoxyCompactList}\small\item\em Converts a 28x28 image into a vector of size 784. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{namespace_utils_a84d3a65643c619d912c61376a773fa59}{max\+Index}} (const std\+::vector$<$ double $>$ \&output)
+\begin{DoxyCompactList}\small\item\em Returns the index of the maximum value in a vector. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{namespace_utils_a6d9bdc380040fd26cf270e065b46612b}{mse}} (std\+::vector$<$ double $>$ expected, std\+::vector$<$ double $>$ actual)
+\begin{DoxyCompactList}\small\item\em Calculates the mean squared error (MSE) between two vectors. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{namespace_utils_a724d6cc466c6a156307bdd717327537b}{split\+Data}} (const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&outputs, double validation\+Fraction, std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&train\+Inputs, std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&train\+Outputs, std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&val\+Inputs, std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&val\+Outputs)
+\begin{DoxyCompactList}\small\item\em Splits the input and output data into training and validation sets. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{namespace_utils_a16b346b8abcbc6a8b21b44cc3edf74b0}{test\+Accuracy}} (\mbox{\hyperlink{class_network}{Network}} \&nn, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&expected\+Outputs)
+\begin{DoxyCompactList}\small\item\em Calculates the accuracy of a network on a given dataset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_utils_a1afccb336e98379f33ea043d793fbeee}\label{namespace_utils_a1afccb336e98379f33ea043d793fbeee}} 
+\index{Utils@{Utils}!getRandom@{getRandom}}
+\index{getRandom@{getRandom}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{getRandom()}{getRandom()}}
+{\footnotesize\ttfamily static double Utils\+::get\+Random (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generates a random number between 0 and 1. 
+
+\begin{DoxyReturn}{Returns}
+double The random number. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_utils_a84d3a65643c619d912c61376a773fa59}\label{namespace_utils_a84d3a65643c619d912c61376a773fa59}} 
+\index{Utils@{Utils}!maxIndex@{maxIndex}}
+\index{maxIndex@{maxIndex}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{maxIndex()}{maxIndex()}}
+{\footnotesize\ttfamily static size\+\_\+t Utils\+::max\+Index (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the index of the maximum value in a vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & The input vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+size\+\_\+t The index of the maximum value. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_utils_a6d9bdc380040fd26cf270e065b46612b}\label{namespace_utils_a6d9bdc380040fd26cf270e065b46612b}} 
+\index{Utils@{Utils}!mse@{mse}}
+\index{mse@{mse}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{mse()}{mse()}}
+{\footnotesize\ttfamily static double Utils\+::mse (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$}]{expected,  }\item[{std\+::vector$<$ double $>$}]{actual }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the mean squared error (MSE) between two vectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em expected} & The vector of expected values. \\
+\hline
+{\em actual} & The vector of actual values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The mean squared error. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If the expected and actual vectors have different sizes. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{namespace_utils_a888a98248550e161b7ead8e325747ae3}\label{namespace_utils_a888a98248550e161b7ead8e325747ae3}} 
+\index{Utils@{Utils}!normalize@{normalize}}
+\index{normalize@{normalize}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{normalize()}{normalize()}}
+{\footnotesize\ttfamily static std\+::vector$<$double$>$ Utils\+::normalize (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Normalizes a vector of data to have a mean of 0 and standard deviation of 1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The input data vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$double$>$ The normalized data vector. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_utils_a724d6cc466c6a156307bdd717327537b}\label{namespace_utils_a724d6cc466c6a156307bdd717327537b}} 
+\index{Utils@{Utils}!splitData@{splitData}}
+\index{splitData@{splitData}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{splitData()}{splitData()}}
+{\footnotesize\ttfamily static void Utils\+::split\+Data (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{inputs,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{outputs,  }\item[{double}]{validation\+Fraction,  }\item[{std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{train\+Inputs,  }\item[{std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{train\+Outputs,  }\item[{std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{val\+Inputs,  }\item[{std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{val\+Outputs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Splits the input and output data into training and validation sets. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The input data. \\
+\hline
+{\em outputs} & The output data. \\
+\hline
+{\em validation\+Fraction} & The fraction of examples to use for validation. \\
+\hline
+{\em train\+Inputs} & The vector to store the training input data. \\
+\hline
+{\em train\+Outputs} & The vector to store the training output data. \\
+\hline
+{\em val\+Inputs} & The vector to store the validation input data. \\
+\hline
+{\em val\+Outputs} & The vector to store the validation output data. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespace_utils_a16b346b8abcbc6a8b21b44cc3edf74b0}\label{namespace_utils_a16b346b8abcbc6a8b21b44cc3edf74b0}} 
+\index{Utils@{Utils}!testAccuracy@{testAccuracy}}
+\index{testAccuracy@{testAccuracy}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{testAccuracy()}{testAccuracy()}}
+{\footnotesize\ttfamily static double Utils\+::test\+Accuracy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_network}{Network}} \&}]{nn,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{inputs,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{expected\+Outputs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the accuracy of a network on a given dataset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nn} & The neural network. \\
+\hline
+{\em inputs} & The input data. \\
+\hline
+{\em expected\+Outputs} & The expected output data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The accuracy of the network. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_utils_aa4acce7172d9170ec629c12cc1add848}\label{namespace_utils_aa4acce7172d9170ec629c12cc1add848}} 
+\index{Utils@{Utils}!toVector@{toVector}}
+\index{toVector@{toVector}!Utils@{Utils}}
+\doxysubsubsection{\texorpdfstring{toVector()}{toVector()}}
+{\footnotesize\ttfamily static std\+::vector$<$double$>$ Utils\+::to\+Vector (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{image }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a 28x28 image into a vector of size 784. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & The input image vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$double$>$ The vector representation of the image. 
+\end{DoxyReturn}

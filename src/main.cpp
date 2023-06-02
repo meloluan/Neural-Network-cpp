@@ -4,9 +4,11 @@
 
 #include "Network.h"
 #include "Utils.h"
+#include "matplotlibcpp.h"
 #include "mnist/mnist_reader.hpp"
 #include "preprocess/Pca.h"
 
+namespace plt = matplotlibcpp;
 using namespace std;
 
 void mnist_digits_problem();
@@ -20,21 +22,23 @@ void performParameterSearch(
 
 template <typename T>
 double crossValidate(Network& nn, unsigned numEpochs, double learningRate,
-                     double validationFraction, const std::vector<std::vector<T>>& inputs,
+                     double regularizationTerm, double validationFraction,
+                     const std::vector<std::vector<T>>& inputs,
                      const std::vector<std::vector<T>>& outputs, unsigned k);
 
 int main() {
-    mnist_digits_problem();
+    // mnist_digits_problem();
+    xor_problem();
     return 0;
 }
 
 void mnist_digits_problem() {
     // MNIST_DATA_LOCATION set by MNIST cmake config
-    // std::cout << "MNIST data directory: " << MNIST_DATA_LOCATION << std::endl;
+    std::cout << "MNIST data directory: " << MNIST_DATA_LOCATION << std::endl;
 
     // Load MNIST data
     mnist::MNIST_dataset<std::vector, std::vector<uint8_t>, uint8_t> dataset =
-        mnist::read_dataset<std::vector, std::vector, uint8_t, uint8_t>("MNIST_DATA_LOCATION");
+        mnist::read_dataset<std::vector, std::vector, uint8_t, uint8_t>(MNIST_DATA_LOCATION);
 
     std::cout << "Number of training images = " << dataset.training_images.size() << std::endl;
     std::cout << "Number of training labels = " << dataset.training_labels.size() << std::endl;
@@ -61,21 +65,21 @@ void mnist_digits_problem() {
         outputs[i][dataset.training_labels[i]] = 1.0;
     }
 
-    Pca preprocessor(100);
-    inputs = preprocessor.process(inputs);
+    // Pca preprocessor(100);
+    // inputs = preprocessor.process(inputs);
 
     std::cout << "Number of dimensions = " << inputs[0].size() << std::endl;
 
     // Criar a rede neural
+    std::vector<std::pair<unsigned, ActivationFunctionType>> layerConfig = {
+        {784, ActivationFunctionType::Sigmoid},
+        {256, ActivationFunctionType::Sigmoid},
+        {10, ActivationFunctionType::Softmax}};
+
     // std::vector<std::pair<unsigned, ActivationFunctionType>> layerConfig = {
-    //     {784, ActivationFunctionType::ReLU},
+    //     {100, ActivationFunctionType::ReLU},
     //     {256, ActivationFunctionType::ReLU},
     //     {10, ActivationFunctionType::Softmax}};
-
-    std::vector<std::pair<unsigned, ActivationFunctionType>> layerConfig = {
-        {100, ActivationFunctionType::ReLU},
-        {256, ActivationFunctionType::ReLU},
-        {10, ActivationFunctionType::Softmax}};
 
     // std::vector<double> learningRates = {0.1, 0.01, 0.001, 0.0001, 0.00001};
     // std::vector<double> validationFractions = {0.1, 0.2, 0.3, 0.4, 0.5};
@@ -116,7 +120,7 @@ void mnist_digits_problem() {
 
     // std::cout << "Accuracy: " << accuracy << "%" << std::endl;
     performParameterSearch(inputs, outputs, layerConfig, LossFunctionType::CrossEntropy, numEpochs,
-                           learningRates, validationFractions, 4);
+                           learningRates, validationFractions, 2);
 }
 void performParameterSearch(
     const std::vector<std::vector<double>>& inputs, const std::vector<std::vector<double>>& outputs,
@@ -136,8 +140,10 @@ void performParameterSearch(
 
                 // Perform cross-validation
                 Network nn(layerConfig, lossFunction);
-                accuracy = crossValidate(nn, numEpochs, learningRate, validationFraction, inputs,
-                                         outputs, numFolds);
+
+                auto regularizationTerm = 0.1;
+                accuracy = crossValidate(nn, numEpochs, learningRate, regularizationTerm,
+                                         validationFraction, inputs, outputs, numFolds);
                 std::cout << "Accuracy: " << accuracy << std::endl;
 
                 // Check if this is the best parameter combination so far
@@ -157,7 +163,8 @@ void performParameterSearch(
 
 template <typename T>
 double crossValidate(Network& nn, unsigned numEpochs, double learningRate,
-                     double validationFraction, const std::vector<std::vector<T>>& inputs,
+                     double regularizationTerm, double validationFraction,
+                     const std::vector<std::vector<T>>& inputs,
                      const std::vector<std::vector<T>>& outputs, unsigned k) {
     // Define o tamanho das partes do dataset
     size_t partSize = inputs.size() / k;
@@ -179,10 +186,10 @@ double crossValidate(Network& nn, unsigned numEpochs, double learningRate,
                 trainOutputs.push_back(outputs[j]);
             }
         }
-        std::cout << testInputs.size() << " - " << testOutputs.size() << std::endl;
-        std::cout << trainInputs.size() << " - " << trainOutputs.size() << std::endl;
+
         // Treina o modelo com as partes de treinamento
-        nn.train(trainInputs, trainOutputs, numEpochs, learningRate, validationFraction,
+        nn.train(trainInputs, trainOutputs, numEpochs, learningRate, regularizationTerm,
+                 validationFraction,
                  [&numEpochs, &validationFraction](unsigned epoch, double error, double valError) {
                      epoch++;
                      static auto startTime = std::chrono::high_resolution_clock::now();
@@ -198,7 +205,7 @@ double crossValidate(Network& nn, unsigned numEpochs, double learningRate,
                                << "s - Remaining Time: " << remainingTime << "s" << std::endl;
                  });
         // Testa o modelo na parte de teste e armazena a métrica de avaliação
-        double metric = nn.meanSquaredError(testInputs, testOutputs);
+        double metric = nn.accuracy(testInputs, testOutputs);
         std::cout << "Metric: " << metric << std::endl;
         metrics[i] = metric;
     }
@@ -218,25 +225,50 @@ void xor_problem() {
 
     auto numEpochs = 10000;
     auto learningRate = 0.01;
-    auto validationFraction = 0;
+    auto validationFraction = 0.0;
+    auto regularizationTerm = 0.0;
+
+    std::vector<double> trainLossHistory;
+    std::vector<double> valLossHistory;
 
     // Create a new neural network and train it on the training set
     Network nn(layerConfig, LossFunctionType::BinaryCrossEntropy);
-    nn.train(inputs, outputs, numEpochs, learningRate, validationFraction,
-             [&numEpochs, &validationFraction](unsigned epoch, double error, double valError) {
-                 epoch++;
-                 static auto startTime = std::chrono::high_resolution_clock::now();
-                 auto currentTime = std::chrono::high_resolution_clock::now();
-                 double elapsedTime =
-                     std::chrono::duration<double>(currentTime - startTime).count();
+    nn.train(
+        inputs, outputs, numEpochs, learningRate, regularizationTerm, validationFraction,
+        [&numEpochs, &validationFraction, &trainLossHistory, &valLossHistory](
+            unsigned epoch, double error, double valError) {
+            epoch++;
+            static auto startTime = std::chrono::high_resolution_clock::now();
+            auto currentTime = std::chrono::high_resolution_clock::now();
+            double elapsedTime = std::chrono::duration<double>(currentTime - startTime).count();
 
-                 double remainingTime = (numEpochs - epoch) * elapsedTime / epoch;
+            double remainingTime = (numEpochs - epoch) * elapsedTime / epoch;
 
-                 std::cout << "Epoch " << epoch << " - Error: " << error
-                           << " - Validation Error: " << validationFraction
-                           << " - Elapsed Time: " << elapsedTime
-                           << "s - Remaining Time: " << remainingTime << "s" << std::endl;
-             });
+            trainLossHistory.push_back(error);
+            valLossHistory.push_back(valError);
+
+            std::cout << "Epoch " << epoch << " - Error: " << error
+                      << " - Validation Error: " << valError << " - Elapsed Time: " << elapsedTime
+                      << "s - Remaining Time: " << remainingTime << "s" << std::endl;
+        });
+
+    plt::figure();
+    plt::title("Training Loss");
+    plt::xlabel("Epoch");
+    plt::ylabel("Loss");
+    plt::plot(trainLossHistory);
+    plt::legend();  // mostra a legenda
+    std::cout << "Saving training loss plot on ./trainLoss.png" << std::endl;
+    plt::savefig("./trainLoss.png");
+
+    plt::figure();
+    plt::title("Validation Loss");
+    plt::xlabel("Epoch");
+    plt::ylabel("Loss");
+    plt::plot(valLossHistory);
+    plt::legend();  // mostra a legenda
+    std::cout << "Saving validation loss plot on ./valLoss.png" << std::endl;
+    plt::savefig("./valLoss.png");
 
     double correct = 0;
     for (size_t i = 0; i < inputs.size(); i++) {
@@ -249,4 +281,11 @@ void xor_problem() {
     double accuracy = correct / inputs.size() * 100;
 
     std::cout << "Accuracy: " << accuracy << "%" << std::endl;
+
+    // Testando a rede
+    for (const auto& input : inputs) {
+        auto output = nn.predict(input);
+        std::cout << "Input: " << input[0] << ", " << input[1] << "\n";
+        std::cout << "Output: " << output[0] << "\n";
+    }
 }

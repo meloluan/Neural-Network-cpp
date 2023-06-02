@@ -1,0 +1,57 @@
+\hypertarget{main_8cpp}{}\doxysection{/home/brabo/\+Projetos/neural-\/network-\/cpp/src/main.cpp File Reference}
+\label{main_8cpp}\index{/home/brabo/Projetos/neural-\/network-\/cpp/src/main.cpp@{/home/brabo/Projetos/neural-\/network-\/cpp/src/main.cpp}}
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}Network.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}matplotlibcpp.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mnist/mnist\+\_\+reader.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}preprocess/\+Pca.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_acdb944bc9c601b9bcdfb1e59075f5f65}{mnist\+\_\+digits\+\_\+problem}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_a5387d10552b43ce851699497faa50595}{xor\+\_\+problem}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_aaae16fdf9b4e730551bb1bdadd784f55}{perform\+Parameter\+Search}} (const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&outputs, const std\+::vector$<$ std\+::pair$<$ unsigned, \mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}{Activation\+Function\+Type}} $>$$>$ \&layer\+Config, \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039}{Loss\+Function\+Type}} loss\+Function, const std\+::vector$<$ unsigned $>$ \&num\+Epochs\+Values, const std\+::vector$<$ double $>$ \&learning\+Rate\+Values, const std\+::vector$<$ double $>$ \&validation\+Fraction\+Values, unsigned num\+Folds)
+\item 
+{\footnotesize template$<$typename T $>$ }\\double \mbox{\hyperlink{main_8cpp_a6ea072beec0368983645cdeeb5b49f02}{cross\+Validate}} (\mbox{\hyperlink{class_network}{Network}} \&nn, unsigned num\+Epochs, double learning\+Rate, double regularization\+Term, double validation\+Fraction, const std\+::vector$<$ std\+::vector$<$ T $>$$>$ \&inputs, const std\+::vector$<$ std\+::vector$<$ T $>$$>$ \&outputs, unsigned k)
+\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_a6ea072beec0368983645cdeeb5b49f02}\label{main_8cpp_a6ea072beec0368983645cdeeb5b49f02}} 
+\index{main.cpp@{main.cpp}!crossValidate@{crossValidate}}
+\index{crossValidate@{crossValidate}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{crossValidate()}{crossValidate()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+double cross\+Validate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_network}{Network}} \&}]{nn,  }\item[{unsigned}]{num\+Epochs,  }\item[{double}]{learning\+Rate,  }\item[{double}]{regularization\+Term,  }\item[{double}]{validation\+Fraction,  }\item[{const std\+::vector$<$ std\+::vector$<$ T $>$$>$ \&}]{inputs,  }\item[{const std\+::vector$<$ std\+::vector$<$ T $>$$>$ \&}]{outputs,  }\item[{unsigned}]{k }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_acdb944bc9c601b9bcdfb1e59075f5f65}\label{main_8cpp_acdb944bc9c601b9bcdfb1e59075f5f65}} 
+\index{main.cpp@{main.cpp}!mnist\_digits\_problem@{mnist\_digits\_problem}}
+\index{mnist\_digits\_problem@{mnist\_digits\_problem}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{mnist\_digits\_problem()}{mnist\_digits\_problem()}}
+{\footnotesize\ttfamily void mnist\+\_\+digits\+\_\+problem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_aaae16fdf9b4e730551bb1bdadd784f55}\label{main_8cpp_aaae16fdf9b4e730551bb1bdadd784f55}} 
+\index{main.cpp@{main.cpp}!performParameterSearch@{performParameterSearch}}
+\index{performParameterSearch@{performParameterSearch}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{performParameterSearch()}{performParameterSearch()}}
+{\footnotesize\ttfamily void perform\+Parameter\+Search (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{inputs,  }\item[{const std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{outputs,  }\item[{const std\+::vector$<$ std\+::pair$<$ unsigned, \mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}{Activation\+Function\+Type}} $>$$>$ \&}]{layer\+Config,  }\item[{\mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039}{Loss\+Function\+Type}}}]{loss\+Function,  }\item[{const std\+::vector$<$ unsigned $>$ \&}]{num\+Epochs\+Values,  }\item[{const std\+::vector$<$ double $>$ \&}]{learning\+Rate\+Values,  }\item[{const std\+::vector$<$ double $>$ \&}]{validation\+Fraction\+Values,  }\item[{unsigned}]{num\+Folds }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a5387d10552b43ce851699497faa50595}\label{main_8cpp_a5387d10552b43ce851699497faa50595}} 
+\index{main.cpp@{main.cpp}!xor\_problem@{xor\_problem}}
+\index{xor\_problem@{xor\_problem}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{xor\_problem()}{xor\_problem()}}
+{\footnotesize\ttfamily void xor\+\_\+problem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+

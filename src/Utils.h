@@ -1,3 +1,6 @@
+#ifndef UTILS_H
+#define UTILS_H
+
 #include <math.h>
 
 #include <algorithm>
@@ -9,6 +12,11 @@
 
 namespace Utils {
 
+/**
+ * @brief Generates a random number between 0 and 1.
+ *
+ * @return double The random number.
+ */
 static double getRandom() {
     static std::random_device rd;
     static std::mt19937 gen(rd());
@@ -16,23 +24,28 @@ static double getRandom() {
     return dis(gen);
 }
 
-// Normaliza um vetor de dados para ter média 0 e desvio padrão 1
+/**
+ * @brief Normalizes a vector of data to have a mean of 0 and standard deviation of 1.
+ *
+ * @param data The input data vector.
+ * @return std::vector<double> The normalized data vector.
+ */
 static std::vector<double> normalize(const std::vector<double>& data) {
     double mean = 0.0, sd = 0.0;
 
-    // Calcula a média
+    // Calculate the mean
     for (auto& d : data) {
         mean += d;
     }
     mean /= data.size();
 
-    // Calcula o desvio padrão
+    // Calculate the standard deviation
     for (auto& d : data) {
         sd += std::pow(d - mean, 2);
     }
     sd = std::sqrt(sd / (data.size() - 1));
 
-    // Normaliza os dados
+    // Normalize the data
     std::vector<double> normalizedData(data.size());
     for (size_t i = 0; i < data.size(); i++) {
         normalizedData[i] = (data[i] - mean) / sd;
@@ -41,7 +54,12 @@ static std::vector<double> normalize(const std::vector<double>& data) {
     return normalizedData;
 }
 
-// Converte uma imagem 28x28 em um vetor de tamanho 784
+/**
+ * @brief Converts a 28x28 image into a vector of size 784.
+ *
+ * @param image The input image vector.
+ * @return std::vector<double> The vector representation of the image.
+ */
 static std::vector<double> toVector(const std::vector<uint8_t>& image) {
     std::vector<double> vec(784);
     for (size_t i = 0; i < 784; i++) {
@@ -50,7 +68,12 @@ static std::vector<double> toVector(const std::vector<uint8_t>& image) {
     return vec;
 }
 
-// Retorna o índice do maior valor de um vetor
+/**
+ * @brief Returns the index of the maximum value in a vector.
+ *
+ * @param output The input vector.
+ * @return size_t The index of the maximum value.
+ */
 static size_t maxIndex(const std::vector<double>& output) {
     double maxVal = output[0];
     size_t maxIndex = 0;
@@ -63,9 +86,17 @@ static size_t maxIndex(const std::vector<double>& output) {
     return maxIndex;
 }
 
+/**
+ * @brief Calculates the mean squared error (MSE) between two vectors.
+ *
+ * @param expected The vector of expected values.
+ * @param actual The vector of actual values.
+ * @return double The mean squared error.
+ * @throws std::invalid_argument If the expected and actual vectors have different sizes.
+ */
 static double mse(std::vector<double> expected, std::vector<double> actual) {
     if (expected.size() != actual.size()) {
-        throw std::invalid_argument("Expected and actual vectors must have same size.");
+        throw std::invalid_argument("Expected and actual vectors must have the same size.");
     }
     double error_sum = 0.0;
     for (int i = 0; i < expected.size(); i++) {
@@ -76,16 +107,27 @@ static double mse(std::vector<double> expected, std::vector<double> actual) {
     return mse;
 }
 
+/**
+ * @brief Splits the input and output data into training and validation sets.
+ *
+ * @param inputs The input data.
+ * @param outputs The output data.
+ * @param validationFraction The fraction of examples to use for validation.
+ * @param trainInputs The vector to store the training input data.
+ * @param trainOutputs The vector to store the training output data.
+ * @param valInputs The vector to store the validation input data.
+ * @param valOutputs The vector to store the validation output data.
+ */
 static void splitData(const std::vector<std::vector<double>>& inputs,
                       const std::vector<std::vector<double>>& outputs, double validationFraction,
                       std::vector<std::vector<double>>& trainInputs,
                       std::vector<std::vector<double>>& trainOutputs,
                       std::vector<std::vector<double>>& valInputs,
                       std::vector<std::vector<double>>& valOutputs) {
-    // Determinar o número de exemplos para validação
+    // Determine the number of examples for validation
     size_t numValExamples = static_cast<size_t>(inputs.size() * validationFraction);
 
-    // Selecionar aleatoriamente os exemplos de validação
+    // Select random indices for validation examples
     std::vector<size_t> valIndices;
     std::unordered_set<size_t> valIndicesSet;
     while (valIndicesSet.size() < numValExamples) {
@@ -96,7 +138,7 @@ static void splitData(const std::vector<std::vector<double>>& inputs,
         }
     }
 
-    // Separar os exemplos de treinamento e validação
+    // Separate the training and validation examples
     trainInputs.reserve(inputs.size() - numValExamples);
     trainOutputs.reserve(outputs.size() - numValExamples);
     valInputs.reserve(numValExamples);
@@ -111,6 +153,15 @@ static void splitData(const std::vector<std::vector<double>>& inputs,
         }
     }
 }
+
+/**
+ * @brief Calculates the accuracy of a network on a given dataset.
+ *
+ * @param nn The neural network.
+ * @param inputs The input data.
+ * @param expectedOutputs The expected output data.
+ * @return double The accuracy of the network.
+ */
 static double testAccuracy(Network& nn, const std::vector<std::vector<double>>& inputs,
                            const std::vector<std::vector<double>>& expectedOutputs) {
     unsigned numCorrect = 0;
@@ -125,4 +176,6 @@ static double testAccuracy(Network& nn, const std::vector<std::vector<double>>& 
     return (double)numCorrect / inputs.size();
 }
 
-};  // namespace Utils
+}  // namespace Utils
+
+#endif  // UTILS_H

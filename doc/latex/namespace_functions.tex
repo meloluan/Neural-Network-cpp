@@ -1,0 +1,128 @@
+\hypertarget{namespace_functions}{}\doxysection{Functions Namespace Reference}
+\label{namespace_functions}\index{Functions@{Functions}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{namespace_functions_a3caf863b32c42750228d14d58ad5acf4}{sigmoid}} (double x)
+\begin{DoxyCompactList}\small\item\em Calculates the sigmoid activation function for the given input. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{namespace_functions_af92da11698f0360b451e602311ebdcbe}{sigmoid\+Derivative}} (double x)
+\begin{DoxyCompactList}\small\item\em Calculates the derivative of the sigmoid activation function for the given input. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{namespace_functions_a336e1ea9feba129cfc2e759cd993a3b2}{re\+LU}} (double x)
+\begin{DoxyCompactList}\small\item\em Calculates the Re\+LU activation function for the given input. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{namespace_functions_a5cb71e22fdc1b8ce73561627a11d2b9d}{re\+LUDerivative}} (double x)
+\begin{DoxyCompactList}\small\item\em Calculates the derivative of the Re\+LU activation function for the given input. \end{DoxyCompactList}\item 
+static std\+::vector$<$ double $>$ \mbox{\hyperlink{namespace_functions_a503864e9c290addf76753d31f77efd24}{softmax}} (const std\+::vector$<$ double $>$ \&inputs)
+\begin{DoxyCompactList}\small\item\em Calculates the softmax activation function for the given inputs. \end{DoxyCompactList}\item 
+static std\+::vector$<$ double $>$ \mbox{\hyperlink{namespace_functions_a3405da83ac5db55451950b5ae14dc7d1}{softmax\+Derivative}} (const std\+::vector$<$ double $>$ \&x)
+\begin{DoxyCompactList}\small\item\em Calculates the derivative of the softmax activation function for the given inputs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_functions_a336e1ea9feba129cfc2e759cd993a3b2}\label{namespace_functions_a336e1ea9feba129cfc2e759cd993a3b2}} 
+\index{Functions@{Functions}!reLU@{reLU}}
+\index{reLU@{reLU}!Functions@{Functions}}
+\doxysubsubsection{\texorpdfstring{reLU()}{reLU()}}
+{\footnotesize\ttfamily static double Functions\+::re\+LU (\begin{DoxyParamCaption}\item[{double}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the Re\+LU activation function for the given input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The input value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The output of the Re\+LU activation function. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_functions_a5cb71e22fdc1b8ce73561627a11d2b9d}\label{namespace_functions_a5cb71e22fdc1b8ce73561627a11d2b9d}} 
+\index{Functions@{Functions}!reLUDerivative@{reLUDerivative}}
+\index{reLUDerivative@{reLUDerivative}!Functions@{Functions}}
+\doxysubsubsection{\texorpdfstring{reLUDerivative()}{reLUDerivative()}}
+{\footnotesize\ttfamily static double Functions\+::re\+LUDerivative (\begin{DoxyParamCaption}\item[{double}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the derivative of the Re\+LU activation function for the given input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The input value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The derivative of the Re\+LU activation function. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_functions_a3caf863b32c42750228d14d58ad5acf4}\label{namespace_functions_a3caf863b32c42750228d14d58ad5acf4}} 
+\index{Functions@{Functions}!sigmoid@{sigmoid}}
+\index{sigmoid@{sigmoid}!Functions@{Functions}}
+\doxysubsubsection{\texorpdfstring{sigmoid()}{sigmoid()}}
+{\footnotesize\ttfamily static double Functions\+::sigmoid (\begin{DoxyParamCaption}\item[{double}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the sigmoid activation function for the given input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The input value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The output of the sigmoid activation function. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_functions_af92da11698f0360b451e602311ebdcbe}\label{namespace_functions_af92da11698f0360b451e602311ebdcbe}} 
+\index{Functions@{Functions}!sigmoidDerivative@{sigmoidDerivative}}
+\index{sigmoidDerivative@{sigmoidDerivative}!Functions@{Functions}}
+\doxysubsubsection{\texorpdfstring{sigmoidDerivative()}{sigmoidDerivative()}}
+{\footnotesize\ttfamily static double Functions\+::sigmoid\+Derivative (\begin{DoxyParamCaption}\item[{double}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the derivative of the sigmoid activation function for the given input. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The input value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The derivative of the sigmoid activation function. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_functions_a503864e9c290addf76753d31f77efd24}\label{namespace_functions_a503864e9c290addf76753d31f77efd24}} 
+\index{Functions@{Functions}!softmax@{softmax}}
+\index{softmax@{softmax}!Functions@{Functions}}
+\doxysubsubsection{\texorpdfstring{softmax()}{softmax()}}
+{\footnotesize\ttfamily static std\+::vector$<$double$>$ Functions\+::softmax (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{inputs }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the softmax activation function for the given inputs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The input values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$double$>$ The outputs of the softmax activation function. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_functions_a3405da83ac5db55451950b5ae14dc7d1}\label{namespace_functions_a3405da83ac5db55451950b5ae14dc7d1}} 
+\index{Functions@{Functions}!softmaxDerivative@{softmaxDerivative}}
+\index{softmaxDerivative@{softmaxDerivative}!Functions@{Functions}}
+\doxysubsubsection{\texorpdfstring{softmaxDerivative()}{softmaxDerivative()}}
+{\footnotesize\ttfamily static std\+::vector$<$double$>$ Functions\+::softmax\+Derivative (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the derivative of the softmax activation function for the given inputs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The input values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$double$>$ The derivatives of the softmax activation function. 
+\end{DoxyReturn}

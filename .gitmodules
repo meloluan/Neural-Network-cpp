@@ -1,6 +1,9 @@
 [submodule "dependencies/googletest"]
 	path = dependencies/googletest
-	url = https://github.com/google/googletest
+	url = https://github.com/meloluan/googletest
 [submodule "dependencies/mnist"]
 	path = dependencies/mnist
 	url = https://github.com/meloluan/mnist
+[submodule "dependencies/matplotlib-cpp"]
+	path = dependencies/matplotlib-cpp
+	url = git@github.com:meloluan/matplotlib-cpp.git

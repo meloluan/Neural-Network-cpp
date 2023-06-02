@@ -1,0 +1,72 @@
+\hypertarget{_layer_8h}{}\doxysection{/home/brabo/\+Projetos/neural-\/network-\/cpp/src/\+Layer.h File Reference}
+\label{_layer_8h}\index{/home/brabo/Projetos/neural-\/network-\/cpp/src/Layer.h@{/home/brabo/Projetos/neural-\/network-\/cpp/src/Layer.h}}
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}Activation\+Functions.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Neuron.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_layer}{Layer}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}{Activation\+Function\+Type}} \{ \mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4ba21eebb164e4b8b9bcf64fdb4d8d5dff4}{Sigmoid}}
+, \mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4badd10d919fa85cf27fc78c0e06fe0b378}{Re\+LU}}
+, \mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4ba31d953b9d49a6b4378f45097047976d0}{Softmax}}
+ \}
+\item 
+enum class \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039}{Loss\+Function\+Type}} \{ \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039a6adf97f83acf6453d4a6a4b1070f3754}{None}}
+, \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039ac9485718dbb9bad98903eed8bee75deb}{Mean\+Squared\+Error}}
+, \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039a77d84e33ad813c4905abe0420d09244e}{Cross\+Entropy}}
+, \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039abf9bc5c08f630b8226f43b38962122c2}{Binary\+Cross\+Entropy}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}\label{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}} 
+\index{Layer.h@{Layer.h}!ActivationFunctionType@{ActivationFunctionType}}
+\index{ActivationFunctionType@{ActivationFunctionType}!Layer.h@{Layer.h}}
+\doxysubsubsection{\texorpdfstring{ActivationFunctionType}{ActivationFunctionType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4b}{Activation\+Function\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Sigmoid@{Sigmoid}!Layer.h@{Layer.h}}\index{Layer.h@{Layer.h}!Sigmoid@{Sigmoid}}}\mbox{\Hypertarget{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4ba21eebb164e4b8b9bcf64fdb4d8d5dff4}\label{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4ba21eebb164e4b8b9bcf64fdb4d8d5dff4}} 
+Sigmoid&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ReLU@{ReLU}!Layer.h@{Layer.h}}\index{Layer.h@{Layer.h}!ReLU@{ReLU}}}\mbox{\Hypertarget{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4badd10d919fa85cf27fc78c0e06fe0b378}\label{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4badd10d919fa85cf27fc78c0e06fe0b378}} 
+Re\+LU&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Softmax@{Softmax}!Layer.h@{Layer.h}}\index{Layer.h@{Layer.h}!Softmax@{Softmax}}}\mbox{\Hypertarget{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4ba31d953b9d49a6b4378f45097047976d0}\label{_layer_8h_a0e6a09896488ab27db5f1d29dc878c4ba31d953b9d49a6b4378f45097047976d0}} 
+Softmax&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{_layer_8h_a99f69d560d1d5d271404083409688039}\label{_layer_8h_a99f69d560d1d5d271404083409688039}} 
+\index{Layer.h@{Layer.h}!LossFunctionType@{LossFunctionType}}
+\index{LossFunctionType@{LossFunctionType}!Layer.h@{Layer.h}}
+\doxysubsubsection{\texorpdfstring{LossFunctionType}{LossFunctionType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_layer_8h_a99f69d560d1d5d271404083409688039}{Loss\+Function\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{None@{None}!Layer.h@{Layer.h}}\index{Layer.h@{Layer.h}!None@{None}}}\mbox{\Hypertarget{_layer_8h_a99f69d560d1d5d271404083409688039a6adf97f83acf6453d4a6a4b1070f3754}\label{_layer_8h_a99f69d560d1d5d271404083409688039a6adf97f83acf6453d4a6a4b1070f3754}} 
+None&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MeanSquaredError@{MeanSquaredError}!Layer.h@{Layer.h}}\index{Layer.h@{Layer.h}!MeanSquaredError@{MeanSquaredError}}}\mbox{\Hypertarget{_layer_8h_a99f69d560d1d5d271404083409688039ac9485718dbb9bad98903eed8bee75deb}\label{_layer_8h_a99f69d560d1d5d271404083409688039ac9485718dbb9bad98903eed8bee75deb}} 
+Mean\+Squared\+Error&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CrossEntropy@{CrossEntropy}!Layer.h@{Layer.h}}\index{Layer.h@{Layer.h}!CrossEntropy@{CrossEntropy}}}\mbox{\Hypertarget{_layer_8h_a99f69d560d1d5d271404083409688039a77d84e33ad813c4905abe0420d09244e}\label{_layer_8h_a99f69d560d1d5d271404083409688039a77d84e33ad813c4905abe0420d09244e}} 
+Cross\+Entropy&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BinaryCrossEntropy@{BinaryCrossEntropy}!Layer.h@{Layer.h}}\index{Layer.h@{Layer.h}!BinaryCrossEntropy@{BinaryCrossEntropy}}}\mbox{\Hypertarget{_layer_8h_a99f69d560d1d5d271404083409688039abf9bc5c08f630b8226f43b38962122c2}\label{_layer_8h_a99f69d560d1d5d271404083409688039abf9bc5c08f630b8226f43b38962122c2}} 
+Binary\+Cross\+Entropy&\\
+\hline
+
+\end{DoxyEnumFields}

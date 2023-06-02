@@ -1,0 +1,74 @@
+\hypertarget{namespace_loss_functions}{}\doxysection{Loss\+Functions Namespace Reference}
+\label{namespace_loss_functions}\index{LossFunctions@{LossFunctions}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{namespace_loss_functions_a426ed624070c659aa68f8b73e3c2e9d5}{mean\+Squared\+Error\+Loss}} (const std\+::vector$<$ double $>$ \&expected\+Outputs, const std\+::vector$<$ double $>$ \&forward\+Output)
+\begin{DoxyCompactList}\small\item\em Calculates the mean squared error loss between the expected outputs and the forward output. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{namespace_loss_functions_a2213a3103ee924258055014039a80f99}{cross\+Entropy\+Loss}} (const std\+::vector$<$ double $>$ \&expected\+Outputs, const std\+::vector$<$ double $>$ \&forward\+Output)
+\begin{DoxyCompactList}\small\item\em Calculates the cross-\/entropy loss between the expected outputs and the forward output. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{namespace_loss_functions_a8da915309c176064d2a871a04e4d1dd5}{binary\+Cross\+Entropy\+Loss}} (const std\+::vector$<$ double $>$ \&expected\+Outputs, const std\+::vector$<$ double $>$ \&forward\+Output)
+\begin{DoxyCompactList}\small\item\em Calculates the binary cross-\/entropy loss between the expected outputs and the forward output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_loss_functions_a8da915309c176064d2a871a04e4d1dd5}\label{namespace_loss_functions_a8da915309c176064d2a871a04e4d1dd5}} 
+\index{LossFunctions@{LossFunctions}!binaryCrossEntropyLoss@{binaryCrossEntropyLoss}}
+\index{binaryCrossEntropyLoss@{binaryCrossEntropyLoss}!LossFunctions@{LossFunctions}}
+\doxysubsubsection{\texorpdfstring{binaryCrossEntropyLoss()}{binaryCrossEntropyLoss()}}
+{\footnotesize\ttfamily static double Loss\+Functions\+::binary\+Cross\+Entropy\+Loss (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{expected\+Outputs,  }\item[{const std\+::vector$<$ double $>$ \&}]{forward\+Output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the binary cross-\/entropy loss between the expected outputs and the forward output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em expected\+Outputs} & The expected output values. \\
+\hline
+{\em forward\+Output} & The forward output values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The binary cross-\/entropy loss. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_loss_functions_a2213a3103ee924258055014039a80f99}\label{namespace_loss_functions_a2213a3103ee924258055014039a80f99}} 
+\index{LossFunctions@{LossFunctions}!crossEntropyLoss@{crossEntropyLoss}}
+\index{crossEntropyLoss@{crossEntropyLoss}!LossFunctions@{LossFunctions}}
+\doxysubsubsection{\texorpdfstring{crossEntropyLoss()}{crossEntropyLoss()}}
+{\footnotesize\ttfamily static double Loss\+Functions\+::cross\+Entropy\+Loss (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{expected\+Outputs,  }\item[{const std\+::vector$<$ double $>$ \&}]{forward\+Output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the cross-\/entropy loss between the expected outputs and the forward output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em expected\+Outputs} & The expected output values. \\
+\hline
+{\em forward\+Output} & The forward output values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The cross-\/entropy loss. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_loss_functions_a426ed624070c659aa68f8b73e3c2e9d5}\label{namespace_loss_functions_a426ed624070c659aa68f8b73e3c2e9d5}} 
+\index{LossFunctions@{LossFunctions}!meanSquaredErrorLoss@{meanSquaredErrorLoss}}
+\index{meanSquaredErrorLoss@{meanSquaredErrorLoss}!LossFunctions@{LossFunctions}}
+\doxysubsubsection{\texorpdfstring{meanSquaredErrorLoss()}{meanSquaredErrorLoss()}}
+{\footnotesize\ttfamily static double Loss\+Functions\+::mean\+Squared\+Error\+Loss (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ double $>$ \&}]{expected\+Outputs,  }\item[{const std\+::vector$<$ double $>$ \&}]{forward\+Output }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the mean squared error loss between the expected outputs and the forward output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em expected\+Outputs} & The expected output values. \\
+\hline
+{\em forward\+Output} & The forward output values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double The mean squared error loss. 
+\end{DoxyReturn}
